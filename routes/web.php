@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +18,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Welcome
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Quizzes
+Route::get('/home', [QuizController::class, 'index']);
+Route::get('quizzes/show', [QuizController::class, 'create']);
+Route::get('quizzes/create', [QuizController::class, 'create']);
+Route::post('quizzes/store', [QuizController::class, 'create']);
+Route::get('quizzes/edit', [QuizController::class, 'create']);
+Route::patch('quizzes/update', [QuizController::class, 'create']);
+Route::delete('quizzes/destroy', [QuizController::class, 'create']);
+
+// Authentication
+Route::get('register', [RegisterController::class, 'create']);
+Route::post('register', [RegisterController::class, 'store']);
+Route::get('login', [SessionsController::class, 'create']);
+Route::post('login', [SessionsController::class, 'store']);
