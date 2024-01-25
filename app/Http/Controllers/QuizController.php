@@ -10,7 +10,14 @@ class QuizController extends Controller
     public function index() {
         
         return view('quizzes.index', [
-            'quizzes' => Quiz::all(),
+            'quizzes' => Quiz::with('questions', 'questions.answers', 'user')->get(),
+        ]);
+    }
+
+    public function show(Quiz $quiz) {
+
+        return view('quizzes.show', [
+            'quiz' => $quiz,
         ]);
     }
 }

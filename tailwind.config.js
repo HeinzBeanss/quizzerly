@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      'background': '#ffffff',
+      'surface': '#ffffff',
+      'words': '#ffffff',
+      'primary': '#ffffff',
+      'secondary': '#ffffff',
+    }
   },
   plugins: [
     // require('@tailwindcss/forms'),
