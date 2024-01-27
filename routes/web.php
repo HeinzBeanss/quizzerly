@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -33,8 +34,13 @@ Route::get('quizzes/edit', [QuizController::class, 'edit']);
 Route::patch('quizzes/update', [QuizController::class, 'update']);
 Route::delete('quizzes/destroy', [QuizController::class, 'destroy']);
 
-// Authentication
+// Authentication / User
 Route::get('register', [RegisterController::class, 'create']);
 Route::post('register', [RegisterController::class, 'store']);
-Route::get('login', [SessionsController::class, 'create']);
-Route::post('login', [SessionsController::class, 'store']);
+Route::get('login', [SessionsController::class, 'create'])->name('login');
+Route::post('login', [SessionsController::class, 'store'])->name('login');
+
+Route::get('profile', [ProfileController::class, 'show'])->middleware('auth');
+// Maybe edit Profile too later down the line.
+
+// 

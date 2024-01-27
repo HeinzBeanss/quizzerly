@@ -6,11 +6,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
     @vite('resources/css/app.css')
     <title>{{ $pagetitle }}</title>
 </head>
 
-<body class="bg-zinc-950 w-full">
+<body class="bg-background w-full h-full font-sans">
+
+    <header class="flex justify-around bg-surface py-3 items-center">
+        <a href="/home">
+            <h1 class="text-3xl text-words">Quizzerly</h1>
+        </a>
+        <div class="text-words flex gap-6">
+            @auth
+
+                <p>Hello,
+                    <a href="/profile"> {{ ucwords(auth()->user()->name) }}
+                </p>
+
+                <button>Log Out</button>
+                </a>
+            @else
+                <a href="/login">Log In</a>
+                <a href="/register">Register</a>
+            @endauth
+
+        </div>
+    </header>
     {{ $slot }}
 </body>
 

@@ -20,4 +20,25 @@ class QuizController extends Controller
             'quiz' => $quiz,
         ]);
     }
+
+    public function create() {
+        
+        return view('quizzes.create');
+    }
+
+    public function store() {
+        // store the quiz
+    }
+
+    public function edit() {
+        return view('quizzes.edit');
+    }
+
+    public function update(Quiz $quiz) {
+        // update the quiz
+    }
+
+    public function destroy(Quiz $quiz) {
+        // delete the quiz
+    }
 }
