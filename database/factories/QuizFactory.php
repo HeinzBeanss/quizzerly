@@ -24,7 +24,7 @@ class QuizFactory extends Factory
             'slug' => fake()->slug(),
             // thumbnail?
             'user_id' => User::factory(),
-            'category_id' => Category::factory(),
+            'category_id' => Category::pluck('id')->random(),
         ];
     }
 }

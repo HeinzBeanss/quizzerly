@@ -6,7 +6,9 @@
         alt="Quiz Thumbnail">
 
     <a href="/quizzes/{{ $quiz->slug }}">
-        <div class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-black z-1"></div>
+        <div
+            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-black z-1 hover:opacity-0 transition-opacity duration-700">
+        </div>
     </a>
 
     <div class="flex flex-col justify-end h-full">

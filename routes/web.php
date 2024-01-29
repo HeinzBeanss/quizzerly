@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
@@ -27,12 +28,16 @@ Route::get('/', function () {
 
 // Quizzes
 Route::get('home', [QuizController::class, 'index']);
-Route::get('quizzes/{quiz:slug}', [QuizController::class, 'show']);
+Route::get('quizzes/{quiz:slug}', [QuizController::class, 'show'])->name('quiz.show');
 Route::get('quizzes/create', [QuizController::class, 'create']);
 Route::post('quizzes/store', [QuizController::class, 'store']);
 Route::get('quizzes/edit', [QuizController::class, 'edit']);
 Route::patch('quizzes/update', [QuizController::class, 'update']);
 Route::delete('quizzes/destroy', [QuizController::class, 'destroy']);
+Route::post('quizzes/{post:slug}/complete', [QuizController::class, 'complete']);
+
+// Categories
+Route::get('categories/{category:slug}/quizzes', [CategoryController::class, 'index']);
 
 // Authentication / User
 Route::get('register', [RegisterController::class, 'create']);

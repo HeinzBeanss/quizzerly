@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "copy-assets": "cp node_modules/@glidejs/glide/dist/css/glide.core.min.css public/css && cp node_modules/@glidejs/glide/dist/css/glide.theme.min.css public/css && cp node_modules/@glidejs/glide/dist/glide.min.js public/js"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.17",

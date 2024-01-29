@@ -28,6 +28,9 @@ export default {
       red: colors.red,
       black: colors.black,
       slate: colors.slate,
+      white: colors.white,
+      blue: colors.blue,
+      green: colors.green,
 
     }
   },
