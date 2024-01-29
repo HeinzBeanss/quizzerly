@@ -83,8 +83,9 @@ class QuizController extends Controller
             }
         }
         // add an incrememt to the quiz.count or whatever it is.
-        $percentage = ($correctAnswersScore > 0) ? ceil($correctAnswersScore / count($correctAnswersArray) * 100) : 0;
+        $percentage = ($correctAnswersScore > 0) ? ($correctAnswersScore / count($correctAnswersArray) * 100) : 0;
 
+        $quiz->average_score = (($quiz->average_score * $quiz->times_taken) + $percentage) / ($quiz->times_taken + 1);
 
         $quiz->times_taken++;
         $quiz->save();

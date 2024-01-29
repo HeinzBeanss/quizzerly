@@ -18,7 +18,7 @@
         @else
             <p>You got:</p>
             <p>{{ session('score') }} / {{ count(session('correctAnswers')) }}</p>
-            <p>{{ session('percentage') }}%</p>
+            <p>{{ ceil(session('percentage')) }}%</p>
         @endif
 
     </form>
