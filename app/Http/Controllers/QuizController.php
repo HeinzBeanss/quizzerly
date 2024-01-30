@@ -31,7 +31,6 @@ class QuizController extends Controller
 
     public function create()
     {
-
         return view('quizzes.create');
     }
 
@@ -53,6 +52,14 @@ class QuizController extends Controller
     public function destroy(Quiz $quiz)
     {
         // delete the quiz
+    }
+
+    public function random()
+    {
+
+        $randomQuiz = Quiz::inRandomOrder()->first();
+
+        return redirect("/quizzes/$randomQuiz->slug");
     }
 
     public function complete()
@@ -96,5 +103,11 @@ class QuizController extends Controller
             'score' => $correctAnswersScore,
             'percentage' => $percentage,
         ]);
+    }
+
+    public function testt()
+    {
+
+        return view('quizzes.index');
     }
 }

@@ -15,9 +15,15 @@
                             <input type="search" class="rounded-xl w-96 pl-8" placeholder="Search">
                         </div>
 
-                        <button class="px-6 py-4 bg-surface rounded-xl text-xl">Random Quiz</button>
+                        <a href="/quizzes/random" class="px-6 py-4 bg-surface rounded-xl text-xl">Random Quiz</a>
                         or
-                        <button class="px-6 py-4 bg-surface rounded-xl text-xl">Create your own quiz!</button>
+
+                        @auth
+                            <a href="/quizzes/create" class="px-6 py-4 bg-surface rounded-xl text-xl">Create your own quiz!</a>
+                        @else 
+                            <p>Log in to create a quiz!</p>
+                        @endauth
+                        
                         expand this section to fill the most up.
 
                         Remember, less lines, more surface usage with good padding
