@@ -37,6 +37,7 @@ class QuizController extends Controller
     public function store()
     {
         // store the quiz
+        dd(request());
     }
 
     public function edit()

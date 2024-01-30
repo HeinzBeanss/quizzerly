@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 
 class SessionsController extends Controller
 {
-    public function create() {
-        
+    public function create()
+    {
+
         return view('sessions/create');
     }
 
-    public function store() {
-        
+    public function store()
+    {
+
         $attributes = request()->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -23,13 +25,13 @@ class SessionsController extends Controller
         }
 
         session()->regenerate();
-        return redirect('/')->with('success', 'Welcome back!');
+        return redirect('/home')->with('success', 'Welcome back!');
     }
 
-    public function destroy() {
+    public function destroy()
+    {
 
         auth()->logout();
-        return redirect('/home')->with('success', 'You\'ve been logged out.' );
-
+        return redirect('/home')->with('success', 'You\'ve been logged out.');
     }
 }

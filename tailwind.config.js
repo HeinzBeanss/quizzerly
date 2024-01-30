@@ -32,7 +32,10 @@ export default {
       blue: colors.blue,
       green: colors.green,
 
-    }
+    },
+    // transitionDuration: {
+    //   '2000': '2000ms',
+    // }
   },
   plugins: [
     // require('@tailwindcss/forms'),
