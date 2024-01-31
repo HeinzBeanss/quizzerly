@@ -31,6 +31,7 @@ export default {
       white: colors.white,
       blue: colors.blue,
       green: colors.green,
+      gray: colors.gray,
 
     },
     // transitionDuration: {

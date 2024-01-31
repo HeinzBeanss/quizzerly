@@ -1,7 +1,9 @@
 <div class="flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative">
-    <img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
-        src="@if ($quiz->thumbnail) {{ asset('storage/' . $post->thumbnail) }} @endif
-{{ asset('storage/quiz-default.jpg') }}"
+<img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
+        src="@if ($quiz->thumbnail) {{ asset("storage/{$quiz->thumbnail}") }} 
+        @else
+            {{ asset('storage/quiz-default.jpg') }}"
+        @endif
         alt="Quiz Thumbnail">
 
     <a href="/quizzes/{{ $quiz->slug }}">

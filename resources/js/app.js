@@ -4,7 +4,7 @@ console.log("this works!");
 
 
 
-let questionCount = 0;
+let questionCount = 1;
 
 window.addQuestion = () => {
 
@@ -28,7 +28,7 @@ window.addQuestion = () => {
     const questionInput = document.createElement('input');
     questionContainerTop.appendChild(questionInput);
     questionInput.type = "text";
-    questionInput.name = `question[${thisQuestion}]`;
+    questionInput.name = `question[${thisQuestion}][0]`;
     questionInput.setAttribute('required', "true");
     questionInput.classList.add('w-full', 'rounded-xl',);
     //create delete question button.
@@ -37,7 +37,7 @@ window.addQuestion = () => {
     // Answer One
     const answerInput = document.createElement('input');
     answerInput.type = "text";
-    answerInput.name = `question[${thisQuestion}][0][correct]`;
+    answerInput.name = `question[${thisQuestion}][1]`;
     answerInput.setAttribute('required', "true");
     answerInput.classList.add('max-h-24', 'pt-3', 'pb-3', 'rounded-xl');
     questionContainerBottom.appendChild(answerInput);
@@ -45,7 +45,7 @@ window.addQuestion = () => {
     // Answer Two
     const answerInputTwo = document.createElement('input');
     answerInputTwo.type = "text";
-    answerInputTwo.name = `question[${thisQuestion}][1]`;
+    answerInputTwo.name = `question[${thisQuestion}][2]`;
     answerInputTwo.setAttribute('required', "true");
     answerInputTwo.classList.add('max-h-24', 'pt-3', 'pb-3', 'rounded-xl');
     questionContainerBottom.appendChild(answerInputTwo);
@@ -66,7 +66,7 @@ window.addAnswer = (thisQuestion) => {
     console.log(thisQuestion);
 
     const questionContainerBottom = document.getElementById(`questionContainerBottom${thisQuestion}`);
-    const answerCount = questionContainerBottom.children.length;
+    const answerCount = questionContainerBottom.children.length + 1;
 
     console.log(questionContainerBottom);
 

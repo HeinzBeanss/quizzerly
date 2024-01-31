@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('question_id')->constrained()->cascadeOnDelete();
-            $table->boolean('is_correct');
+            $table->boolean('is_correct')->default(0);
             $table->timestamps();
         });
     }
