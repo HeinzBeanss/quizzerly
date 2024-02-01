@@ -1,11 +1,9 @@
 <div class="flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative">
     <img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
-    @if ($quiz->thumbnail)
-        src="{{ asset("storage/{$quiz->thumbnail}") }}"
+        @if ($quiz->thumbnail) src="{{ asset("storage/{$quiz->thumbnail}") }}"
     @else
-        src="{{ asset('storage/quiz-default.jpg') }}"
-    @endif
-    alt="Quiz Thumbnail">
+        src="{{ asset('storage/quiz-default.jpg') }}" @endif
+        alt="Quiz Thumbnail">
 
     <a href="/quizzes/{{ $quiz->slug }}">
         <div
@@ -20,7 +18,7 @@
                 <h2 class="text-3xl">{{ ucwords($quiz->name) }}</h2>
             </a>
             <p class="text-xs">Created by
-                <a href="/users/{{ $quiz->user->username }}" class="italic">{{ $quiz->user->name }}
+                <a href="/users/{{ $quiz->user->username }}/profile" class="italic">{{ $quiz->user->name }}
                 </a>
             </p>
         </div>

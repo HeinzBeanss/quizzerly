@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function show() {
+    public function show(User $user) {
         
         return view('profile.show', [
-            'quizzes' => Quiz::where('user_id', auth()->user()->id)->get(),
+            'user' => $user,
+            'quizzes' => Quiz::where('user_id', $user->id)->get(),
         ]);
     }
 }

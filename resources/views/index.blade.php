@@ -55,11 +55,18 @@
                     </div>
 
                     <div class="w-1/6">
-                        TOp quizzes
+                        Top quizzes
+                        @foreach ($topquizzes as $topquiz)
+                            <p>{{ $topquiz->name }}</p>
+                            <p>{{ $topquiz->user->name }}</p>
+                            <p>{{ $topquiz->times_taken }}</p>
+                        @endforeach
                     </div>
                     <div class="border-b border-gray-300 my-6"></div>
 
                 </section>
+
+                <a class="bg-surface rounded-xl px-8 py-4" href="/quizzes">Browse More Quizzes</a>
             </div>
         @else
             No Quizzes to Style.

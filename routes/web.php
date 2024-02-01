@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
@@ -36,9 +37,9 @@ Route::get('quizzes/random', [QuizController::class, 'random']);
 Route::get('quizzes/popular', [QuizController::class, 'popular']);
 
 Route::get('quizzes/{quiz:slug}', [QuizController::class, 'show'])->name('quiz.show');
-Route::get('quizzes/edit/{quiz:slug}', [QuizController::class, 'edit'])->middleware('auth');
-Route::patch('quizzes/update/{quiz:slug}', [QuizController::class, 'update'])->middleware('auth');
-Route::delete('quizzes/destroy/{quiz:slug}', [QuizController::class, 'destroy'])->middleware('auth');
+Route::get('quizzes/{quiz:slug}/edit', [QuizController::class, 'edit'])->middleware('auth');
+Route::patch('quizzes/{quiz:slug}/update', [QuizController::class, 'update'])->middleware('auth');
+Route::delete('quizzes/{quiz:slug}', [QuizController::class, 'destroy'])->middleware('auth');
 Route::post('quizzes/{quiz:slug}/complete', [QuizController::class, 'complete']);
 
 
@@ -51,7 +52,8 @@ Route::post('register', [RegisterController::class, 'store']);
 Route::get('login', [SessionsController::class, 'create'])->name('login');
 Route::post('login', [SessionsController::class, 'store'])->name('login');
 
-Route::get('profile', [ProfileController::class, 'show'])->middleware('auth');
+Route::get('users/{user:username}/profile', [ProfileController::class, 'show']);
 // Maybe edit Profile too later down the line.
 
-// 
+// Comments
+Route::post('quizzes/{quiz:slug}/comment', [CommentController::class, 'store'])->middleware('auth');

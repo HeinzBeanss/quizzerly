@@ -5,14 +5,15 @@
         class="w-3/4 flex flex-col gap-4">
         @csrf
 
-        <input type="text" name="name" placeholder="Enter a quiz title.">
-        <input type="text" name="description" placeholder="Enter a description for your quiz.">
-        <input type="file" name="thumbnail" accept="image/*">
+        <input type="text" name="name" placeholder="Enter a quiz title." value="{{ old('name') }}">
+        <input type="text" name="description" placeholder="Enter a description for your quiz."
+            value="{{ old('description') }}">
+        <input type="file" name="thumbnail" accept="image/*" value="{{ old('thumbnail') }}">
 
+        {{-- if old, then set that to current category, otherwise 0 it. --}}
+        <x-dropdown :categories="$categories" :currentCategory="$categories[0]" />
 
-            <x-dropdown :categories="$categories" />
-
-            <x-input-question />
+        <x-input-question />
 
     </form>
 
@@ -22,13 +23,13 @@
 
 
     @if ($errors->any())
-    <div class="text-red text-xs">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+        <div class="text-red text-xs">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 </x-layout>

@@ -100,7 +100,7 @@ window.addAnswer = (thisQuestion) => {
     answerInputDynamic.type = "text";
     answerInputDynamic.name = `question[${thisQuestion}][${answerCount}]`;
     answerInputDynamic.classList.add('w-full', 'transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'py-0', 'rounded-xl', 'pl-4');
-    answerInputDynamic.setAttribute('requied', 'true');
+    answerInputDynamic.setAttribute('required', 'true');
 
     const deleteAnswerButton = document.createElement('button');
     deleteAnswerButton.textContent = "Delete";

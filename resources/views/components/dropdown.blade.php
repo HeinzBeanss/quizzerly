@@ -1,8 +1,11 @@
-@props(['categories'])
+@props(['categories', 'currentCategory'])
 
 <div x-data="{
     open: false,
-    selectedOption: { id: '', name: 'Category / Theme' },
+    selectedOption: {
+        id: {{ $currentCategory->id ?? '' }},
+        name: '{{ $currentCategory->name ?? 'Category / Theme' }}'
+    },
     toggle(event, option) {
         if (this.open) {
             return this.close();

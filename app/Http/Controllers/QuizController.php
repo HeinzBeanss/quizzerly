@@ -14,10 +14,9 @@ class QuizController extends Controller
 {
     public function home()
     {
-
-        // add a featured quiz query!
         return view('index', [
-            'quizzes' => Quiz::with('user')->orderBy('created_at', 'desc')->take(7)->get(),
+            'quizzes' => Quiz::with('user', 'category')->orderBy('created_at', 'desc')->take(7)->get(),
+            'topquizzes' => Quiz::with('user', 'category')->orderBy('times_taken', 'desc')->take(5)->get(),
             'featuredquiz' => Quiz::where('created_at', '>=', Carbon::now()->subWeek())->orderBy('times_taken', 'desc')->first(),
             'categories' => Category::inRandomOrder()->get(),
         ]);
@@ -26,7 +25,7 @@ class QuizController extends Controller
     public function index()
     {
         return view('quizzes.index', [
-            'quizzes' => Quiz::latest()->filter(request(['search']))->with('user')->paginate(7),
+            'quizzes' => Quiz::latest()->filter(request(['search']))->with('user', 'category')->paginate(7),
             'categories' => Category::inRandomOrder()->get(),
         ]);
     }
@@ -39,6 +38,7 @@ class QuizController extends Controller
                 'questions.answers' => function ($query) {
                     $query->inRandomOrder();
                 },
+                'comments'
             ])->findOrFail($quiz->id),
         ]);
     }
@@ -52,9 +52,6 @@ class QuizController extends Controller
 
     public function store()
     {
-        // store the quiz
-        // dd(request());
-
         $quizAttributes = request()->validate([
             'name' => 'required|max:255|unique:quizzes,name',
             'thumbnail' => 'image',
@@ -62,11 +59,14 @@ class QuizController extends Controller
             'category_id' => 'required|numeric',
         ]);
 
-        // file needs properly storing.
-
         $quizAttributes['user_id'] = auth()->user()->id;
         $quizAttributes['slug'] = Str::slug($quizAttributes['name']);
-        $quizAttributes['thumbnail'] = request()->file('thumbnail')->store('quizzes');
+
+        if (request('thumbnail') ?? false) {
+            $quizAttributes['thumbnail'] = request()->file('thumbnail')->store('quizzes');
+        } else {
+            $quizAttributes['thumbnail'] = 'quiz-default.jpg';
+        }
 
         $quiz = Quiz::create($quizAttributes);
 
@@ -111,14 +111,17 @@ class QuizController extends Controller
             }
         };
 
-        return redirect("/quizzes/$quiz->slug");
+        return redirect("/quizzes/$quiz->slug")->with('success', 'Quiz successfully created.');
         // maybe add with a success message: Quiz successfully created.
 
     }
 
-    public function edit()
+    public function edit(Quiz $quiz)
     {
-        return view('quizzes.edit');
+        return view('quizzes.edit', [
+            'quiz' => $quiz,
+            'categories' => Category::all(),
+        ]);
     }
 
     public function update(Quiz $quiz)
@@ -128,7 +131,9 @@ class QuizController extends Controller
 
     public function destroy(Quiz $quiz)
     {
-        // delete the quiz
+        $quiz->delete();
+
+        return redirect('/users/' . auth()->user()->username .  '/profile');
     }
 
     public function random()

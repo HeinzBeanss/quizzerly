@@ -1,4 +1,4 @@
-<x-layout :pagetitle="'Quizzerly - ' . ucwords(auth()->user()->name)">
+<x-layout :pagetitle="ucwords($user->name)">
 
     <h1>Profile</h1>
 
@@ -7,9 +7,9 @@
 
 
         <div class="flex flex-col">
-            <h2>{{ auth()->user()->name }}</h2>
-            <p>Username: {{ auth()->user()->username }}</p>
-            <p>Account created: {{ auth()->user()->created_at->diffForHumans() }}</p>
+            <h2>{{ $user->name }}</h2>
+            <p>Username: {{ $user->username }}</p>
+            <p>Account created: {{ $user->created_at->diffForHumans() }}</p>
         </div>
     </div>
 
@@ -18,7 +18,15 @@
     <div class="lg:grid lg:grid-cols-6 gap-4 mt-4">
         @foreach ($quizzes as $quiz)
             <x-quiz-preview :quiz="$quiz" />
-            <a class="bg-surface px-6 py-4 rounded-xl" href="quizzes/edit/{{ $quiz->slug }}">Edit Quiz</a>
+
+            @if ($user->id == auth()->user()->id)
+                <a class="bg-surface px-6 py-4 rounded-xl" href="/quizzes/{{ $quiz->slug }}/edit">Edit Quiz</a>
+                <form method="POST" action="/quizzes/{{ $quiz->slug }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="bg-surface px-6 py-4 rounded-xl">Delete</button>
+                </form>
+            @endif
         @endforeach
 
     </div>
