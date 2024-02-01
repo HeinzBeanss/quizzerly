@@ -1,4 +1,4 @@
-<x-layout :pagetitle="'Quizzerly - ' . $category->name">
+<x-layout :pagetitle="'Quizzerly - Popular'">
     <main>
 
         @if ($quizzes->count())
@@ -6,7 +6,7 @@
 
                 <section class="flex gap-10 w-3/4">
                     <div>
-                        <h2 class="text-3xl mb-2">New Quizzes</h2>
+                        <h2 class="text-3xl mb-2">Top Quizzes</h2>
                         <x-featured-quiz-preview :quiz="$quizzes[0]" />
                         <div class="lg:grid lg:grid-cols-6 gap-4 mt-4">
                             @foreach ($quizzes->skip(1) as $quiz)
@@ -16,8 +16,6 @@
                         </div>
                         {{ $quizzes->links() }}
                     </div>
-
-                    <x-search-area :categories="$categories" />
 
                 </section>
             </div>

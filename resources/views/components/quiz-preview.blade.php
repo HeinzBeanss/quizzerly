@@ -24,6 +24,6 @@
                 </a>
             </p>
         </div>
-        <p class="mt-2 z-10">{{ $quiz->description }}</p>
+        <p class="mt-2 z-10 overflow-hidden overflow-ellipsis">{{ $quiz->description }}</p>
     </div>
 </div>

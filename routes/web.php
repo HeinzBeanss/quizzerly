@@ -27,7 +27,8 @@ Route::get('/', function () {
 });
 
 // Quizzes
-Route::get('home', [QuizController::class, 'index']);
+Route::get('home', [QuizController::class, 'home']);
+Route::get('quizzes', [QuizController::class, 'index']);
 Route::get('quizzes/create', [QuizController::class, 'create'])->middleware('auth');
 Route::post('quizzes/store', [QuizController::class, 'store'])->middleware('auth');
 Route::get('quizzes/edit', [QuizController::class, 'edit'])->middleware('auth');
@@ -35,6 +36,7 @@ Route::patch('quizzes/update', [QuizController::class, 'update'])->middleware('a
 Route::delete('quizzes/destroy', [QuizController::class, 'destroy'])->middleware('auth');
 
 Route::get('quizzes/random', [QuizController::class, 'random']);
+Route::get('quizzes/popular', [QuizController::class, 'popular']);
 
 Route::get('quizzes/{quiz:slug}', [QuizController::class, 'show'])->name('quiz.show');
 Route::post('quizzes/{quiz:slug}/complete', [QuizController::class, 'complete']);

@@ -6,16 +6,27 @@ use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
 use App\Models\Quiz;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class QuizController extends Controller
 {
-    public function index()
+    public function home()
     {
 
+        // add a featured quiz query!
+        return view('index', [
+            'quizzes' => Quiz::with('user')->orderBy('created_at', 'desc')->take(7)->get(),
+            'featuredquiz' => Quiz::where('created_at', '>=', Carbon::now()->subWeek())->orderBy('times_taken', 'desc')->first(),
+            'categories' => Category::inRandomOrder()->get(),
+        ]);
+    }
+
+    public function index()
+    {
         return view('quizzes.index', [
-            'quizzes' => Quiz::with('questions', 'questions.answers', 'user')->get(),
+            'quizzes' => Quiz::latest()->filter(request(['search']))->with('user')->paginate(7),
             'categories' => Category::inRandomOrder()->get(),
         ]);
     }
@@ -105,26 +116,6 @@ class QuizController extends Controller
 
     }
 
-    // new quiz to database, with 
-    // slug DONE
-    // description DONE
-    // name DONE
-    // user DONE
-    // category DONE
-
-    // then for each question, in the loop, CREATE A QUESTION  
-    // attach that quiz->id to the quiz
-    // then the first item in the array value is the name
-
-    // then, loop again, for each item in the question array EXCEPT the first one, CREATE AN ANSWER
-    // the question->id = question_id
-    // if the index = 1 then answer is correct
-    // then the name ist he value of the key in the array.
-
-    // save them all, all good.
-
-
-
     public function edit()
     {
         return view('quizzes.edit');
@@ -146,6 +137,12 @@ class QuizController extends Controller
         $randomQuiz = Quiz::inRandomOrder()->first();
 
         return redirect("/quizzes/$randomQuiz->slug");
+    }
+
+    public function popular() {
+        return view('quizzes.popular', [
+            'quizzes' => Quiz::with('user')->orderBy('times_taken', 'desc')->paginate(10),
+        ]);
     }
 
     public function complete()

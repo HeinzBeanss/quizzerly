@@ -11,7 +11,8 @@ class CategoryController extends Controller
     public function index(Category $category) {
         return view('categories.index', [
             'category' => $category,
-            'quizzes' => $category->quizzes,
+            'categories' => Category::all(),
+            'quizzes' => $category->quizzes()->paginate(8),
             'topQuizzes' => $category->quizzes()->orderBy('times_taken', 'desc')->take(5)->get(),
         ]);
     }
