@@ -187,10 +187,4 @@ class QuizController extends Controller
             'percentage' => $percentage,
         ]);
     }
-
-    public function testt()
-    {
-
-        return view('quizzes.index');
-    }
 }

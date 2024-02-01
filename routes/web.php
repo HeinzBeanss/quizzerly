@@ -31,14 +31,14 @@ Route::get('home', [QuizController::class, 'home']);
 Route::get('quizzes', [QuizController::class, 'index']);
 Route::get('quizzes/create', [QuizController::class, 'create'])->middleware('auth');
 Route::post('quizzes/store', [QuizController::class, 'store'])->middleware('auth');
-Route::get('quizzes/edit', [QuizController::class, 'edit'])->middleware('auth');
-Route::patch('quizzes/update', [QuizController::class, 'update'])->middleware('auth');
-Route::delete('quizzes/destroy', [QuizController::class, 'destroy'])->middleware('auth');
 
 Route::get('quizzes/random', [QuizController::class, 'random']);
 Route::get('quizzes/popular', [QuizController::class, 'popular']);
 
 Route::get('quizzes/{quiz:slug}', [QuizController::class, 'show'])->name('quiz.show');
+Route::get('quizzes/edit/{quiz:slug}', [QuizController::class, 'edit'])->middleware('auth');
+Route::patch('quizzes/update/{quiz:slug}', [QuizController::class, 'update'])->middleware('auth');
+Route::delete('quizzes/destroy/{quiz:slug}', [QuizController::class, 'destroy'])->middleware('auth');
 Route::post('quizzes/{quiz:slug}/complete', [QuizController::class, 'complete']);
 
 
