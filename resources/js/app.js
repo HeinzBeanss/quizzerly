@@ -50,45 +50,93 @@ window.addQuestion = () => {
     answerInputTwo.classList.add('max-h-24', 'pt-3', 'pb-3', 'rounded-xl');
     questionContainerBottom.appendChild(answerInputTwo);
 
+    const questionButtonContainer = document.createElement('div');
+    questionButtonContainer.classList.add('flex', 'gap-8');
+    questionContainer.appendChild(questionButtonContainer);
+
     // Answer Button
     const addAnswerButton = document.createElement('button');
     addAnswerButton.onclick = () => addAnswer(thisQuestion);
     addAnswerButton.classList.add('px-8', 'py-2', 'bg-surface', 'rounded-xl');
     addAnswerButton.textContent = 'Add Answer';
     addAnswerButton.type = "button";
-    questionContainer.appendChild(addAnswerButton);
+    questionButtonContainer.appendChild(addAnswerButton);
+
+    // Delete Button
+    const deleteAnswerButton = document.createElement('button');
+    deleteAnswerButton.onclick = () => deleteQuestion(thisQuestion);
+    deleteAnswerButton.classList.add('px-8', 'py-2', 'bg-surface', 'rounded-xl');
+    deleteAnswerButton.type = "button";
+    deleteAnswerButton.textContent = "Delete Question";
+    questionButtonContainer.appendChild(deleteAnswerButton);
 
     questionCount++;
 }
 
 window.addAnswer = (thisQuestion) => {
 
-    console.log(thisQuestion);
-
     const questionContainerBottom = document.getElementById(`questionContainerBottom${thisQuestion}`);
+
+    if (questionContainerBottom.lastChild.textContent == "A question is limited to 8 answers.") {
+        questionContainerBottom.lastChild.remove();
+    }
+
     const answerCount = questionContainerBottom.children.length + 1;
 
-    console.log(questionContainerBottom);
-
-    if (answerCount === 8) {
+    if (answerCount === 9) {
         const answerCountValidationMessage = document.createElement('p');
         answerCountValidationMessage.textContent = "A question is limited to 8 answers.";
         answerCountValidationMessage.classList.add('text-red-500', 'text-xs');
         questionContainerBottom.appendChild(answerCountValidationMessage);
         return;
-    } else if (answerCount > 8) {
+    } else if (answerCount > 9) {
         return;
     }
+
+    const answerContainer = document.createElement('div');
+    answerContainer.classList.add('flex', 'justify-between', 'gap-4', 'w-full');
 
     const answerInputDynamic = document.createElement('input');
     answerInputDynamic.type = "text";
     answerInputDynamic.name = `question[${thisQuestion}][${answerCount}]`;
-    answerInputDynamic.classList.add('transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'py-0', 'rounded-xl', 'pl-4');
+    answerInputDynamic.classList.add('w-full', 'transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'py-0', 'rounded-xl', 'pl-4');
     answerInputDynamic.setAttribute('requied', 'true');
-    questionContainerBottom.appendChild(answerInputDynamic);
+
+    const deleteAnswerButton = document.createElement('button');
+    deleteAnswerButton.textContent = "Delete";
+    deleteAnswerButton.classList.add('bg-white');
+    deleteAnswerButton.classList.add('transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'py-0', 'rounded-xl', 'pl-2');
+    deleteAnswerButton.type = "button";
+    deleteAnswerButton.onclick = () => deleteAnswer(answerContainer, thisQuestion);
+
+    questionContainerBottom.appendChild(answerContainer);
+    answerContainer.appendChild(answerInputDynamic);
+    answerContainer.appendChild(deleteAnswerButton);
 
     void answerInputDynamic.offsetHeight;
-    answerInputDynamic.classList.add('pt-3', 'pb-3', 'opacity-100', 'max-h-24');
+    answerInputDynamic.classList.add('pt-3', 'pb-3', 'opacity-100', 'max-h-12');
+    void deleteAnswerButton.offsetHeight;
+    deleteAnswerButton.classList.add('pt-3', 'pb-3', 'opacity-100', 'max-h-12');
 
+}
+
+window.deleteQuestion = (thisQuestion) => {
+
+    const questionContainerBottom = document.getElementById(`questionContainerBottom${thisQuestion}`);
+    const questionContainer = questionContainerBottom.parentNode;
+    questionContainer.remove();
+}
+
+window.deleteAnswer = (answer, thisQuestion) => {
+
+    // void answer.firstChild.offsetHeight;
+    // answer.firstChild.classList.add('opacity-0', 'max-h-0');
+
+    const questionContainerBottom = document.getElementById(`questionContainerBottom${thisQuestion}`);
+    if (questionContainerBottom.lastChild.textContent == "A question is limited to 8 answers.") {
+        questionContainerBottom.lastChild.remove();
+    }
+
+    answer.remove();
 }
 
