@@ -2,9 +2,12 @@ import './bootstrap';
 
 console.log("this works!");
 
+const mainQuestionContainer = document.getElementById('question-container');
 
+let questionCount = mainQuestionContainer.childElementCount;
+console.log(questionCount);
 
-let questionCount = 1;
+// let questionCount = 1;
 
 window.addQuestion = () => {
 
@@ -94,6 +97,7 @@ window.addAnswer = (thisQuestion) => {
     }
 
     const answerContainer = document.createElement('div');
+    answerContainer.id = `answer[${thisQuestion}][${answerCount}]`;
     answerContainer.classList.add('flex', 'justify-between', 'gap-4', 'w-full');
 
     const answerInputDynamic = document.createElement('input');
@@ -107,7 +111,7 @@ window.addAnswer = (thisQuestion) => {
     deleteAnswerButton.classList.add('bg-white');
     deleteAnswerButton.classList.add('transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'py-0', 'rounded-xl', 'pl-2');
     deleteAnswerButton.type = "button";
-    deleteAnswerButton.onclick = () => deleteAnswer(answerContainer, thisQuestion);
+    deleteAnswerButton.onclick = () => deleteAnswer(answerCount, thisQuestion);
 
     questionContainerBottom.appendChild(answerContainer);
     answerContainer.appendChild(answerInputDynamic);
@@ -127,7 +131,8 @@ window.deleteQuestion = (thisQuestion) => {
     questionContainer.remove();
 }
 
-window.deleteAnswer = (answer, thisQuestion) => {
+window.deleteAnswer = (answerCount, thisQuestion) => {
+    console.log(`Question Deleting from: ${thisQuestion}`)
 
     // void answer.firstChild.offsetHeight;
     // answer.firstChild.classList.add('opacity-0', 'max-h-0');
@@ -137,6 +142,7 @@ window.deleteAnswer = (answer, thisQuestion) => {
         questionContainerBottom.lastChild.remove();
     }
 
+    const answer = document.getElementById(`answer[${thisQuestion}][${answerCount}]`)
     answer.remove();
 }
 

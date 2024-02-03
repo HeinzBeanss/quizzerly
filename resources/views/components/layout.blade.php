@@ -30,8 +30,8 @@
 
                 <button class="pl-8">Log Out</button>
             @else
-                <a href="/login">Log In</a>
-                <a href="/register">Register</a>
+                <a class="pl-8" href="/login">Log In</a>
+                <a class="pl-8" href="/register">Register</a>
             @endauth
 
         </div>

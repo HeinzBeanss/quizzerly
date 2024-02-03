@@ -1,8 +1,9 @@
 <x-layout :pagetitle="'Quizzerly - Edit'">
     <h2>Create your quiz</h2>
 
-    <form id="quiz-form" action="/quizzes/store" method="POST" enctype="multipart/form-data"
+    <form id="quiz-form" action="/quizzes/update" method="POST" enctype="multipart/form-data"
         class="w-3/4 flex flex-col gap-4">
+        @method('PATCH')
         @csrf
 
         <input type="text" name="name" placeholder="Enter a quiz title." value="{{ old('title', $quiz->name) }}">
@@ -13,8 +14,12 @@
 
         <x-dropdown :categories="$categories" :currentCategory="$quiz->category" />
 
-        <x-input-question />
-
+        <div id="question-container">
+            {{-- <x-input-question /> --}}
+            @foreach ($quiz->questions as $index => $question)
+                <x-edit-question :index="$index" :question="$question" />
+            @endforeach
+        </div>
     </form>
 
     <button class="px-8 py-2 bg-surface rounded-xl" type="button" onclick="addQuestion()">Add Question</button>

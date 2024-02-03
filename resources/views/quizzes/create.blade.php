@@ -13,7 +13,10 @@
         {{-- if old, then set that to current category, otherwise 0 it. --}}
         <x-dropdown :categories="$categories" :currentCategory="$categories[0]" />
 
-        <x-input-question />
+        <div id="question-container">
+            <x-input-question />
+        </div>
+
 
     </form>
 
