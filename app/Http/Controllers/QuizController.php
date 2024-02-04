@@ -126,7 +126,68 @@ class QuizController extends Controller
 
     public function update(Quiz $quiz)
     {
-        // update the quiz
+
+        $quizAttributes = request()->validate([
+            'name' => "required|max:255|unique:quizzes,name,$quiz->id",
+            'thumbnail' => 'image',
+            'description' => 'required|max:255',
+            'category_id' => 'required|numeric',
+        ]);
+
+        // $quizAttributes['user_id'] = auth()->user()->id;
+        $quizAttributes['slug'] = Str::slug($quizAttributes['name']);
+
+        if (request('thumbnail') ?? false) {
+            $quizAttributes['thumbnail'] = request()->file('thumbnail')->store('quizzes');
+        } else {
+            // $quizAttributes['thumbnail'] = 'quiz-default.jpg';
+        }
+
+        $quiz->update($quizAttributes);
+        $quiz->questions()->delete();
+
+
+        foreach (request('question') as $i => $requestQuestion) {
+
+            request()->validate([
+                "question.$i.0" => 'string|required',
+            ], [
+                "question.$i.0.required" => "The question is required.",
+                "question.$i.0.string" => "The question must be a string.",
+            ]);
+
+            $questionAttributes['quiz_id'] = $quiz->id;
+            $questionAttributes['name'] = $requestQuestion[0];
+
+            $question = Question::create($questionAttributes);
+
+            foreach ($requestQuestion as $j => $requestAnswer) {
+
+                request()->validate([
+                    "question.$i.$j" => 'string|required',
+                ], [
+                    "question.$i.$j.required" => "The answer is required.",
+                    "question.$i.$j.string" => "The answer must be a string.",
+                ]);
+
+                if ($j === 0) {
+                    continue;
+                }
+
+                if ($j === 1) {
+                    $answerAttributes['is_correct'] = true;
+                } else {
+                    $answerAttributes['is_correct'] = false;
+                }
+
+                $answerAttributes['question_id'] = $question->id;
+                $answerAttributes['name'] = $requestAnswer;
+
+                Answer::create($answerAttributes);
+            }
+        };
+
+                return redirect('/users/' . auth()->user()->username .  '/profile')->with('success', 'Quiz successfully updated.');
     }
 
     public function destroy(Quiz $quiz)

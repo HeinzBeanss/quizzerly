@@ -1,7 +1,7 @@
 <x-layout :pagetitle="'Quizzerly - Edit'">
     <h2>Create your quiz</h2>
 
-    <form id="quiz-form" action="/quizzes/update" method="POST" enctype="multipart/form-data"
+    <form id="quiz-form" action="/quizzes/{{ $quiz->slug }}/update" method="POST" enctype="multipart/form-data"
         class="w-3/4 flex flex-col gap-4">
         @method('PATCH')
         @csrf
@@ -24,7 +24,7 @@
 
     <button class="px-8 py-2 bg-surface rounded-xl" type="button" onclick="addQuestion()">Add Question</button>
 
-    <button form="quiz-form" class="px-8 py-2 bg-surface rounded-xl" type="submit">Create Quiz</button>
+    <button form="quiz-form" class="px-8 py-2 bg-surface rounded-xl" type="submit">Update Quiz</button>
 
 
     @if ($errors->any())
