@@ -22,6 +22,7 @@ export default {
     colors: {
       'background': '#121d12',
       'surface': '#162718',
+      'lighter': ' #1f2e20',
       'words': '#eefff2',
       'primary': '#ffffff',
       'secondary': '#ffffff',

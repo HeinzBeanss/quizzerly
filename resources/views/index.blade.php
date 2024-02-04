@@ -55,12 +55,7 @@
                     </div>
 
                     <div class="w-1/6">
-                        Top quizzes
-                        @foreach ($topquizzes as $topquiz)
-                            <p>{{ $topquiz->name }}</p>
-                            <p>{{ $topquiz->user->name }}</p>
-                            <p>{{ $topquiz->times_taken }}</p>
-                        @endforeach
+                        <x-top-quizzes :topquizzes="$topquizzes" />
                     </div>
                     <div class="border-b border-gray-300 my-6"></div>
 
