@@ -1,4 +1,4 @@
-<div class="flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative">
+<div class="flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative z-1">
     <img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
         @if ($quiz->thumbnail) src="{{ asset("storage/{$quiz->thumbnail}") }}"
     @else
@@ -13,7 +13,7 @@
 
 
     <div class="flex flex-col justify-end h-full">
-        <div class="flex justify-between items-center z-10">
+        <div class="flex justify-between items-center z-2">
             <a href="/quizzes/{{ $quiz->slug }}">
                 <h2 class="text-3xl">{{ ucwords($quiz->name) }}</h2>
             </a>

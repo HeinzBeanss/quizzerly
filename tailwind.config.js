@@ -20,12 +20,19 @@ export default {
 
     extend: {},
     colors: {
-      'background': '#121d12',
-      'surface': '#162718',
-      'lighter': ' #1f2e20',
+      // 'background': '#121d12',
+      // 'surface': '#162718',
+      // 'lighter': ' #1f2e20',
+      // 'words': '#eefff2',
+      // 'primary': '#ffffff',
+      // 'secondary': '#ffffff',
+      'background': '#11202a',
+      'surface': '#09796d',
+      'lighter': ' #0d8071',
       'words': '#eefff2',
       'primary': '#ffffff',
       'secondary': '#ffffff',
+      'faint': 'hsl(130, 15%, 85%)',
       red: colors.red,
       black: colors.black,
       slate: colors.slate,
@@ -38,7 +45,12 @@ export default {
     // transitionDuration: {
     //   '2000': '2000ms',
     // }
+    fontFamily: {
+      rubik: ['Rubik', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif'],
+    },
   },
+
   plugins: [
     // require('@tailwindcss/forms'),
   ],
