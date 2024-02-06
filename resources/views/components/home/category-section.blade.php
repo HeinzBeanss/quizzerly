@@ -1,8 +1,7 @@
 @props(['categories'])
 <section class="pt-24 pb-32 bg-faint w-full text-center">
-    <h4 class="text-lg font-medium mb-4">Find your subject</h4>
-    <h2
-        class=" text-3xl mb-12 font-semibold bg-gradient-to-br from-background to-surface  bg-clip-text text-transparent">
+    <h4 class="text-lg font-medium mb-4 text-surface">Find your subject</h4>
+    <h2 class=" text-3xl mb-12 font-bold bg-clip-text text-transparent bg-gradient-to-br from-background to-surface">
         Browse a Specific Category</h2>
     <div class="slider w-full overflow-hidden relative">
         <div class="slides flex gap-6 transition-transform duration-500 ease-in-out">

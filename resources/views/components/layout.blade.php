@@ -18,8 +18,6 @@
 
 <body class="bg-background w-full h-full font-rubik">
 
-    <x-announcement-bar />
-    <x-header />
 
     <main class="w-full">
         {{ $slot }}

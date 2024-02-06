@@ -1,4 +1,4 @@
-    <header class="sticky top-0 w-full z-99 flex justify-between px-8 bg-surface py-3 items-center">
+    <header class="sticky top-0 w-full z-50 flex justify-between px-8  py-3 items-center backdrop-blur-md">
         <a href="/home">
             <h1 class="text-3xl text-words">Quizzerly</h1>
         </a>
