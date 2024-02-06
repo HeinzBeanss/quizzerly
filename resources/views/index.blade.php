@@ -1,23 +1,19 @@
 <x-layout :pagetitle="'Quizzerly - Home'">
 
-    <x-announcement-bar />
-    <div class="relative bg-gradient-to-br from-background to-surface w-full text-white ">
+    <section class="relative text-white pt-36 pb-32">
+        <div class="w-5/6 mx-auto flex gap-8">
+            @if ($quizzes->count())
+                <div class="w-full">
+                    <h2 class="text-3xl font-normal mb-2">Featured Quiz</h2>
+                    <x-featured-quiz-preview :quiz="$featuredquiz" />
+                </div>
+                {{-- <x-search-area :categories="$categories" /> --}}
+            @else
+                No Quizzes to Style.
+            @endif
+        </div>
+    </section>
 
-        <x-header />
-        <section class="pt-32 pb-32">
-            <div class="w-5/6 mx-auto flex gap-8">
-                @if ($quizzes->count())
-                    <div class="w-full">
-                        <h2 class="text-3xl font-normal mb-2">Featured Quiz</h2>
-                        <x-featured-quiz-preview :quiz="$featuredquiz" />
-                    </div>
-                    <x-search-area :categories="$categories" />
-                @else
-                    No Quizzes to Style.
-                @endif
-            </div>
-        </section>
-    </div>
 
     <x-home.category-section :categories="$categories" />
 

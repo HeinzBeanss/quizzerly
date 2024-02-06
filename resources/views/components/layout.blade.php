@@ -16,12 +16,17 @@
     <title>{{ $pagetitle }}</title>
 </head>
 
-<body class="bg-background w-full h-full font-rubik">
+<body class="relative bg-background max-w-full h-full font-rubik">
+
+    <x-announcement-bar />
+    {{-- make into component accepting a height variable i guess? --}}
+    <div class="absolute bg-gradient-to-br from-background to-surface w-full h-300 mb-2 border-background border-b-8">
+    </div>
+    <x-header />
 
 
-    <main class="w-full">
-        {{ $slot }}
-    </main>
+    {{ $slot }}
+
 
 
     <x-flash />

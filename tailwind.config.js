@@ -34,6 +34,10 @@ export default {
         'secondary': '#ffffff',
         'faint': 'hsl(130, 15%, 85%)',
       },
+      height: {
+        '200': '32rem',
+        '300': '48rem',
+      }
     },
     // transitionDuration: {
     //   '2000': '2000ms',

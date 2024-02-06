@@ -1,7 +1,24 @@
 import './bootstrap';
 
-console.log("this works!");
+// Nav Bar Styling
+const navbar = document.getElementById('navbar');
 
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 160) {
+        navbar.classList.add('bg-background'); // Add your desired background color class
+        navbar.classList.remove('backdrop-blur'); // Remove backdrop blur class
+    } else {
+        navbar.classList.remove('bg-background'); // Remove background color class
+        navbar.classList.add('backdrop-blur'); // Add backdrop blur class
+    }
+});
+
+
+
+
+// Quiz Functionality
 const mainQuestionContainer = document.getElementById('question-container');
 
 let questionCount = mainQuestionContainer.childElementCount;
@@ -145,4 +162,5 @@ window.deleteAnswer = (answerCount, thisQuestion) => {
     const answer = document.getElementById(`answer[${thisQuestion}][${answerCount}]`)
     answer.remove();
 }
+
 

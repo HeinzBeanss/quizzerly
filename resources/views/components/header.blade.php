@@ -1,4 +1,5 @@
-    <header class="sticky top-0 w-full z-50 flex justify-between px-8  py-3 items-center backdrop-blur-md">
+    <header id="navbar"
+        class="sticky top-0 w-full z-50 flex justify-between px-8  py-3 items-center backdrop-blur-md transition-all duration-1000">
         <a href="/home">
             <h1 class="text-3xl text-words">Quizzerly</h1>
         </a>
