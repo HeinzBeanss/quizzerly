@@ -1,9 +1,9 @@
 @props(['categories'])
-<section class="pt-24 pb-32 bg-faint w-full text-center">
+<section class="pt-20 pb-20 bg-faint w-full text-center">
     <h4 class="text-lg font-medium mb-4 text-surface">Find your subject</h4>
     <h2 class=" text-3xl mb-12 font-bold bg-clip-text text-transparent bg-gradient-to-br from-background to-surface">
         Browse a Specific Category</h2>
-    <div class="slider w-full overflow-hidden relative">
+    {{-- <div class="slider w-full overflow-hidden relative">
         <div class="slides flex gap-6 transition-transform duration-500 ease-in-out">
             @foreach ($categories as $category)
                 <div class="slide border-box min-w-[calc(100%_/_6)] bg-surface rounded-xl relative">
@@ -21,7 +21,28 @@
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
+
+    <section class="sandbox__carousel">
+        <div class="embla">
+            <div class="embla__viewport">
+                <div class="embla__container">
+                    @foreach ($categories as $category)
+                        <div class="embla__slide">
+                            <a class="relative" href="/categories/{{ $category->slug }}/quizzes">
+
+                                <img class="embla__slide__img rounded-xl "
+                                    src="{{ asset("storage/categories/{$category->thumbnail}") }}"
+                                    alt="Your alt text" />
+                                <div class="absolute bg-surface w-full h-auto"></div>
+                            </a>
+                            <p>{{ $category->name }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <script src="{{ asset('js/carousel.js') }}"></script>

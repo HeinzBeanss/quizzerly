@@ -1,4 +1,5 @@
-<div class=" col-span-3 flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative ">
+<div
+    class=" col-span-3 flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative bg-faintest border-faintest border-solid border-2 box-border">
 
     <img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
         @if ($quiz->thumbnail) src="{{ asset("storage/{$quiz->thumbnail}") }}"
@@ -8,7 +9,7 @@
 
     <a href="/quizzes/{{ $quiz->slug }}">
         <div
-            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-black z-1 hover:opacity-0 transition-opacity duration-700">
+            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 hover:opacity-0 transition-opacity duration-700">
         </div>
     </a>
 

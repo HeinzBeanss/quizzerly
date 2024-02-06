@@ -29,10 +29,11 @@ export default {
         'background': '#11202a',
         'surface': '#09796d',
         'lighter': ' #0d8071',
-        'words': '#eefff2',
+        'words': '#B6CFCA',
         'primary': '#ffffff',
         'secondary': '#ffffff',
         'faint': 'hsl(130, 15%, 85%)',
+        'faintest': '#F0F7F6'
       },
       height: {
         '200': '32rem',

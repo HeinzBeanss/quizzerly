@@ -1,5 +1,17 @@
 import './bootstrap';
 
+
+// Embla Carousel
+import EmblaCarousel from 'embla-carousel'
+import Autoplay from 'embla-carousel-autoplay'
+
+const OPTIONS = { slidesToScroll: 4, dragFree: true, loop: true, autoplay: true, }
+
+const emblaNode = document.querySelector('.embla')
+const viewportNode = emblaNode.querySelector('.embla__viewport')
+const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay()])
+
+
 // Nav Bar Styling
 const navbar = document.getElementById('navbar');
 

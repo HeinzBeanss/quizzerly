@@ -1,4 +1,5 @@
-<div class="flex flex-col bg-surface py-3 px-5 rounded-xl w-full h-96 relative z-20">
+<div
+    class="flex flex-col py-3 px-5 rounded-xl w-full h-96 relative z-20 bg-faintest border-faintest border-solid border-2 box-border">
     <img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
         @if ($quiz->thumbnail) src="{{ asset("storage/{$quiz->thumbnail}") }}"
     @else
@@ -7,12 +8,12 @@
 
     <a href="/quizzes/{{ $quiz->slug }}">
         <div
-            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-black z-1 hover:opacity-0 transition-opacity duration-700">
+            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 hover:opacity-0 transition-opacity duration-700">
         </div>
     </a>
 
 
-    <div class="flex flex-col justify-end h-full">
+    <div class="flex flex-col justify-end h-full text-words">
         <div class="flex justify-between items-center z-2">
             <a href="/quizzes/{{ $quiz->slug }}">
                 <h2 class="text-3xl">{{ ucwords($quiz->name) }}</h2>
