@@ -38,6 +38,9 @@ export default {
       height: {
         '200': '32rem',
         '300': '48rem',
+      },
+      width: {
+        '85/100': '85%',
       }
     },
     // transitionDuration: {

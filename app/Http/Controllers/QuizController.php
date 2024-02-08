@@ -208,6 +208,7 @@ class QuizController extends Controller
     public function popular() {
         return view('quizzes.popular', [
             'quizzes' => Quiz::with('user')->orderBy('times_taken', 'desc')->paginate(10),
+            'categories' => Category::all(),
         ]);
     }
 

@@ -28,10 +28,10 @@
             <div class="embla__viewport">
                 <div class="embla__container">
                     @foreach ($categories as $category)
-                        <div class="embla__slide">
+                        <div class="embla__slide ">
                             <a class="relative" href="/categories/{{ $category->slug }}/quizzes">
 
-                                <img class="embla__slide__img rounded-xl "
+                                <img class="embla__slide__img rounded-xl border-2 border-solid border-background"
                                     src="{{ asset("storage/categories/{$category->thumbnail}") }}"
                                     alt="Your alt text" />
                                 <div class="absolute bg-surface w-full h-auto"></div>

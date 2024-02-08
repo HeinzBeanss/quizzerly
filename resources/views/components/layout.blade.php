@@ -19,16 +19,13 @@
 <body class="relative bg-background max-w-full h-full font-rubik">
 
     <x-announcement-bar />
-    {{-- make into component accepting a height variable i guess? --}}
-    <div class="absolute bg-gradient-to-br from-background to-surface w-full h-300 mb-2 border-background border-b-4">
-    </div>
-    <x-header />
+
 
 
     {{ $slot }}
 
 
-
+    <x-footer />
     <x-flash />
 </body>
 
