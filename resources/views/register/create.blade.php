@@ -1,53 +1,91 @@
 <x-layout :pagetitle="'Quizzerly - Register'">
-    <div class="h-screen  flex justify-center items-center">
-        <div class="lg:w-2/5 md:w-1/2 w-2/3">
-            <form class="bg-gray-400 p-10 rounded-lg shadow-lg min-w-full" action="/register" method="POST">
+    <x-gradient-background height="h-screen" />
 
-                @csrf
-                <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">Register an Account</h1>
+    <a href="/home">
+        <h1 class="absolute top-4 left-4 text-4xl text-words hover:text-white transition duration-500 ease-in z-40">
+            Quizzerly</h1>
+    </a>
 
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="name">Name</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text"
-                        name="name" id="name" placeholder="name" />
-                </div>
+    <section class="relative flex flex-col items-center justify-center min-h-screen">
+        <div class=" flex flex-col px-6 py-20 lg:px-8 bg-white w-2/5 m-x-auto rounded-xl">
+            <div class="sm:mx-auto sm:w-full sm:max-w-sm ">
+                <h2
+                    class="text-center text-2xl font-bold leading-9 tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-background to-surface">
+                    Register your
+                    Quizzerly account</h2>
+            </div>
+            <div class="border-t border-background/20 mt-2 sm:mx-auto sm:w-full sm:max-w-sm ">
+                <form class="space-y-6" action="/register" method="POST">
+                    @csrf
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name
+                            </label>
+                            @error('name')
+                                <p class="text-red-500 text-xs"> {{ $message }} </p>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <input id="name" name="name" type="name" autocomplete="name"
+                                value="{{ old('name') }}" required
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
 
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="username">Username</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text"
-                        name="username" id="username" placeholder="username" />
-                </div>
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="email">Email</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text"
-                        name="email" id="email" placeholder="quizzerly@email.com" />
-                </div>
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="password">Password</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="password"
-                        name="password" id="password" placeholder="password" />
-                </div>
-
-                @error('$name')
-                    <p class="text-red-500"> {{ $message }} </p>
-                @enderror
-
-                @error('$username')
-                    <p class="text-red-500"> {{ $message }} </p>
-                @enderror
-
-                @error('$password')
-                    <p class="text-red-500"> {{ $message }} </p>
-                @enderror
-
-                @error('$name')
-                    <p class="text-red-500"> {{ $message }} </p>
-                @enderror
-
-                <button type="submit"
-                    class="w-full mt-6 bg-indigo-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans">Register</button>
-            </form>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Username
+                            </label>
+                            @error('username')
+                                <p class="text-red-500 text-xs"> {{ $message }} </p>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <input id="username" name="username" type="username" autocomplete="username"
+                                value="{{ old('username') }}" required
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                                address</label>
+                            @error('email')
+                                <p class="text-red-500 text-xs"> {{ $message }} </p>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <input id="email" name="email" type="email" autocomplete="email"
+                                value="{{ old('email') }}" required
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label for="password"
+                                class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                            @error('password')
+                                <p class="text-red-500 text-xs"> {{ $message }} </p>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <input id="password" name="password" type="password" autocomplete="current-password"
+                                required
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-inset focus:ring-surface sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="flex w-full justify-center rounded-md bg-gradient-to-tl from-background to-surface px-3 py-1.5 text-sm leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background">Register
+                            Account</button>
+                    </div>
+                </form>
+                <p class="mt-10 text-center text-sm text-gray-500">
+                    Already have an account?
+                    <a href="/login" class="font-medium leading-6 text-background hover:text-background">Log in
+                        here</a>
+                </p>
+            </div>
         </div>
-    </div>
-
+    </section>
 </x-layout>

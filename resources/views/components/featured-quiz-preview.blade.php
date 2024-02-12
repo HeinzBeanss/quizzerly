@@ -1,3 +1,4 @@
+@props(['quiz'])
 <div
     class="flex flex-col py-3 px-5 rounded-xl w-full h-96 relative z-20 bg-faintest border-faintest border-solid border box-border">
     <img class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"

@@ -51,6 +51,7 @@ Route::get('register', [RegisterController::class, 'create']);
 Route::post('register', [RegisterController::class, 'store']);
 Route::get('login', [SessionsController::class, 'create'])->name('login');
 Route::post('login', [SessionsController::class, 'store'])->name('login');
+Route::delete('logout', [SessionsController::class, 'destroy'])->name('logout');
 
 Route::get('users/{user:username}/profile', [ProfileController::class, 'show']);
 // Maybe edit Profile too later down the line.

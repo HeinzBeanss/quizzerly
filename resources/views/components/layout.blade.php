@@ -18,14 +18,9 @@
 
 <body class="relative bg-background max-w-full h-full font-rubik">
 
-    <x-announcement-bar />
-
-
-
     {{ $slot }}
 
 
-    <x-footer />
     <x-flash />
 </body>
 

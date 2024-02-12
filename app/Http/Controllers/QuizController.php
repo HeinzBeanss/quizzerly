@@ -14,10 +14,18 @@ class QuizController extends Controller
 {
     public function home()
     {
+
+        $featuredquiz = Quiz::where('created_at', '>=', Carbon::now()->subWeek())
+                    ->orderBy('times_taken', 'desc')
+                    ->first();
+        if (!$featuredquiz) {
+            $featuredquiz = Quiz::latest()->first();
+        }
+
         return view('index', [
             'quizzes' => Quiz::with('user', 'category')->orderBy('created_at', 'desc')->take(7)->get(),
             'topquizzes' => Quiz::with('user', 'category')->orderBy('times_taken', 'desc')->take(5)->get(),
-            'featuredquiz' => Quiz::where('created_at', '>=', Carbon::now()->subWeek())->orderBy('times_taken', 'desc')->first(),
+            'featuredquiz' => $featuredquiz,
             'categories' => Category::inRandomOrder()->get(),
         ]);
     }

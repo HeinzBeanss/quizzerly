@@ -3,7 +3,7 @@
 
     <form method="GET" action="/quizzes" class="">
         <input type="search" name="search"
-            class="placeholder-lighter text-background bg-faintest rounded w-96 pl-4 h-10 items-center max-w-48 text-sm"
+            class="placeholder-lighter/70 text-background bg-faintest rounded w-96 pl-4 h-10 items-center max-w-48 text-sm"
             placeholder="Search">
     </form>
 
@@ -48,7 +48,7 @@
 
             @foreach ($categories as $category)
                 <a href="/categories/{{ $category->slug }}/quizzes"
-                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
+                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-surface hover:text-faintest transition-colors duration-300">
                     {{ $category->name }}
                 </a>
             @endforeach
