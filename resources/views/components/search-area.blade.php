@@ -3,7 +3,7 @@
 
     <form method="GET" action="/quizzes" class="">
         <input type="search" name="search"
-            class="placeholder-lighter/70 text-background bg-faintest rounded w-96 pl-4 h-10 items-center max-w-48 text-sm"
+            class="placeholder-lighter/50 text-background bg-faintest rounded w-96 pl-4 h-10 items-center max-w-48 text-sm"
             placeholder="Search">
     </form>
 

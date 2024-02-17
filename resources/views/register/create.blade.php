@@ -17,22 +17,31 @@
             <div class="border-t border-background/20 mt-2 sm:mx-auto sm:w-full sm:max-w-sm ">
                 <form class="space-y-6" action="/register" method="POST">
                     @csrf
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name
-                            </label>
-                            @error('name')
-                                <p class="text-red-500 text-xs"> {{ $message }} </p>
-                            @enderror
-                        </div>
-                        <div class="mt-2">
-                            <input id="name" name="name" type="name" autocomplete="name"
-                                value="{{ old('name') }}" required
-                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
-                        </div>
-                    </div>
+
+                    <x-input name="name" type="text" placeholder="" />
+                    <x-input name="username" type="text" placeholder="" />
+                    <x-input name="email" type="email" placeholder="" />
+                    <x-input name="password" type="password" placeholder="" />
 
                     <div>
+                        <button type="submit"
+                            class="flex w-full justify-center rounded-md bg-gradient-to-tl from-background to-surface px-3 py-1.5 text-sm leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background">Register
+                            Account</button>
+                    </div>
+                </form>
+                <p class="mt-10 text-center text-sm text-gray-500">
+                    Already have an account?
+                    <a href="/login" class="font-medium leading-6 text-background hover:text-background">Log in
+                        here</a>
+                </p>
+            </div>
+        </div>
+    </section>
+</x-layout>
+
+
+
+{{-- <div>
                         <div class="flex items-center justify-between">
                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Username
                             </label>
@@ -73,19 +82,4 @@
                                 required
                                 class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-inset focus:ring-surface sm:text-sm sm:leading-6">
                         </div>
-                    </div>
-                    <div>
-                        <button type="submit"
-                            class="flex w-full justify-center rounded-md bg-gradient-to-tl from-background to-surface px-3 py-1.5 text-sm leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background">Register
-                            Account</button>
-                    </div>
-                </form>
-                <p class="mt-10 text-center text-sm text-gray-500">
-                    Already have an account?
-                    <a href="/login" class="font-medium leading-6 text-background hover:text-background">Log in
-                        here</a>
-                </p>
-            </div>
-        </div>
-    </section>
-</x-layout>
+                    </div> --}}

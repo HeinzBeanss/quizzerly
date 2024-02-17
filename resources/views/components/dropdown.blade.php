@@ -24,7 +24,7 @@
     <!-- Button -->
     <button x-ref="button" x-on:click="toggle('Category / Theme')" :aria-expanded="open"
         :aria-controls="$id('dropdown-button')" type="button"
-        class="flex items-center gap-2 bg-white px-5 py-2.5 rounded-md shadow">
+        class="flex items-center gap-2 bg-faintest text-background px-5 py-2.5 rounded-md text-sm">
 
         <span x-text="selectedOption.name"></span>
         <!-- Heroicon: chevron-down -->
@@ -38,11 +38,11 @@
     <!-- Panel -->
     <div x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)"
         :id="$id('dropdown-button')" style="display: none;"
-        class="absolute left-0 mt-2 w-40 rounded-md bg-white shadow-md">
+        class="absolute left-0 mt-2 w-40 rounded-md bg-faintest text-background shadow-md">
 
         @foreach ($categories as $category)
             <p x-on:click="selectedOption = { id: {{ $category->id }}, name: '{{ $category->name }}' }; open = false;"
-                class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
+                class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-surface hover:text-faintest disabled:text-gray-500">
                 {{ $category->name }}
             </p>
         @endforeach

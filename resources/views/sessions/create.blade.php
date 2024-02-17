@@ -19,7 +19,7 @@
                     @csrf
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                            <label for="email" class="block text-sm font-medium leading-6 text-background">Email
                                 address</label>
                             @error('email')
                                 <p class="text-red-500 text-xs"> {{ $message }} </p>
@@ -27,13 +27,13 @@
                         </div>
                         <div class="mt-2">
                             <input id="email" name="email" type="email" autocomplete="email" required
-                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-background shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div>
                         <div class="flex items-center justify-between">
                             <label for="password"
-                                class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                class="block text-sm font-medium leading-6 text-background">Password</label>
                             @error('password')
                                 <p class="text-red-500 text-xs"> {{ $message }} </p>
                             @enderror
@@ -41,7 +41,7 @@
                         <div class="mt-2">
                             <input id="password" name="password" type="password" autocomplete="current-password"
                                 required
-                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-inset focus:ring-surface sm:text-sm sm:leading-6">
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-background shadow-sm ring-1 ring-inset ring-faint placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-inset focus:ring-surface sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div>
