@@ -72,8 +72,6 @@ class QuizController extends Controller
 
         if (request('thumbnail') ?? false) {
             $quizAttributes['thumbnail'] = request()->file('thumbnail')->store('quizzes');
-        } else {
-            $quizAttributes['thumbnail'] = 'quiz-default.jpg';
         }
 
         $quiz = Quiz::create($quizAttributes);
@@ -147,8 +145,6 @@ class QuizController extends Controller
 
         if (request('thumbnail') ?? false) {
             $quizAttributes['thumbnail'] = request()->file('thumbnail')->store('quizzes');
-        } else {
-            // $quizAttributes['thumbnail'] = 'quiz-default.jpg';
         }
 
         $quiz->update($quizAttributes);

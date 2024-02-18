@@ -11,7 +11,7 @@ class CommentController extends Controller
     public function store(Quiz $quiz) {
         
         request()->validate([
-            'body' => 'required'
+            'body' => 'required|max:255'
         ]);
 
         $quiz->comments()->create([

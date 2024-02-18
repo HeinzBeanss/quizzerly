@@ -32,7 +32,8 @@ export default {
         'words': '#B6CFCA',
         'primary': '#ffffff',
         'secondary': '#ffffff',
-        'faint': 'hsl(130, 15%, 85%)',
+        'faint': '#e3e9e4',
+        'category': '#e3e9e4',
         'faintest': '#F0F7F6'
       },
       height: {

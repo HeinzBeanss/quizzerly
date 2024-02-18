@@ -1,41 +1,38 @@
-@props(['answer', 'questionId'])
-{{-- @dd(session("correctAnswers.$questionId")) --}}
-
-{{-- @dd(session('score')) --}}
+@props(['answer', 'questionId', 'index'])
 
 <li>
     <input type="radio" id="{{ $answer->id }}" name="{{ $questionId }}" value="{{ $answer->id }}" class="hidden peer"
         required>
     @if (!session("selectedAnswers.$questionId"))
         <label for="{{ $answer->id }}"
-            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-background border rounded-lg cursor-pointer hover:text-gray-600 hover:bg-gray-100 text-white hover:text-background hover:bg-white transition duration-500 peer-checked:border-blue-600 peer-checked:text-blue-600">
+            class="text-sm pl-2 block w-full rounded-md py-2 text-background/80 ring-1 ring-inset ring-faint focus:ring-1 rounded-lg cursor-pointer hover:text-gray-600 hover:bg-faintest hover:text-background hover:bg-white transition duration-500 peer-checked:ring-surface peer-checked:bg-faintest peer-checked:text-surface {{ $index === 0 ? '' : 'mt-3' }}">
         @else
             @if (session("selectedAnswers.$questionId") == $answer->id)
                 {{-- this is the selected answer. --}}
                 @if (session("correctAnswers.$questionId") == $answer->id)
                     {{-- <p>CORRECT</p> --}}
                     <label for="{{ $answer->id }}"
-                        class="inline-flex items-center justify-between w-full p-5 border rounded-lg bg-background border-green-500 text-green">
+                        class="text-sm pl-2 block w-full rounded-md py-2 ring-1 ring-inset ring-green-700 text-green-700 {{ $index === 0 ? '' : 'mt-3' }}">
                     @else
                         {{-- <p>WRONG</p> --}}
                         <label for="{{ $answer->id }}"
-                            class="inline-flex items-center justify-between w-full p-5 border rounded-lg bg-background border-red-500 text-red">
+                            class="text-sm pl-2 block w-full rounded-md py-2 ring-1 ring-inset ring-red-500 text-red-400 {{ $index === 0 ? '' : 'mt-3' }}">
                 @endif
             @else
                 {{-- the answer isn't selected --}}
                 @if (session("correctAnswers.$questionId") == $answer->id)
                     {{-- <p>CORRECT BUT NOT SELECTED</p> --}}
                     <label for="{{ $answer->id }}"
-                        class="inline-flex items-center justify-between w-full p-5 border rounded-lg bg-background border-green-500 text-green">
+                        class="text-sm pl-2 block w-full rounded-md py-2 ring-1 ring-inset ring-green-700 text-green-700 {{ $index === 0 ? '' : 'mt-3' }}">
                     @else
                         <label for="{{ $answer->id }}"
-                            class="inline-flex items-center justify-between w-full p-5 border rounded-lg bg-background border-white-500 text-white">
+                            class="text-sm pl-2 block w-full rounded-md py-2 ring-1 ring-inset ring-faint text-background/80 {{ $index === 0 ? '' : 'mt-3' }}">
                 @endif
             @endif
     @endif
 
     <div class="block">
-        <div class="w-full">{{ $answer->name }}</div>
+        <div class="w-full">{{ $index + 1 }}. {{ $answer->name }}</div>
     </div>
     </label>
 </li>

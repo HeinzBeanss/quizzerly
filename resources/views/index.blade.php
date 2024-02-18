@@ -3,7 +3,7 @@
     <x-gradient-background height="h-300" />
     <x-header />
 
-    <section class="relative text-faintest pt-16 pb-32">
+    <section class="relative text-faintest pt-16 pb-32 mb-20">
 
         <x-search-area :categories="$categories" />
 
@@ -49,7 +49,8 @@
         {{-- <div class="border-b border-gray-300 my-6"></div> --}}
 
         <div class="w-full mx-auto flex justify-center pb-16">
-            <a class="bg-surface rounded-xl px-8 py-4 text-faintest" href="/quizzes">Browse More Quizzes</a>
+            <a class="px-5 py-4 bg-faint rounded-md min-w-40 text-sm font-normal tracking-wide border border-white"
+                href="/quizzes">Browse More Quizzes</a>
         </div>
 
     </section>

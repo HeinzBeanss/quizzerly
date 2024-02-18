@@ -1,5 +1,5 @@
 @props(['categories'])
-<section class="pt-20 pb-20 bg-faint w-full text-center">
+<section class="pt-20 pb-20 bg-category w-full text-center">
     <h4 class="text-lg font-medium mb-4 text-surface">Find your subject</h4>
     <h2 class=" text-3xl mb-12 font-bold bg-clip-text text-transparent bg-gradient-to-br from-background to-surface">
         Browse a Specific Category</h2>
