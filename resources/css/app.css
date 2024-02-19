@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default Search Bar Styling */
+input[type="search"]::-webkit-search-cancel-button {
+filter: invert(27%) sepia(84%) saturate(7266%) hue-rotate(169deg) brightness(94%) contrast(93%);
+}
 
 .embla {
   --slide-spacing: 2rem;
   --slide-size: 80%;
   --slide-height: 19rem;
-  padding: 1.6rem;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
 }
 .embla__viewport {
   overflow: hidden;

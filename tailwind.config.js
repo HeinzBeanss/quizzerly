@@ -32,12 +32,14 @@ export default {
         'words': '#B6CFCA',
         'primary': '#ffffff',
         'secondary': '#ffffff',
-        'faint': '#e3e9e4',
+        'faint': '#f9f9f9',
         'category': '#e3e9e4',
-        'faintest': '#F0F7F6'
+        'faintest': '#F0F7F6',
+        'almostwhite': '#fcfcfc'
       },
       height: {
-        '200': '32rem',
+        '200': '34rem',
+        '250': '44rem',
         '300': '48rem',
       },
       width: {

@@ -1,7 +1,7 @@
 @props(['categories'])
-<section class="pt-20 pb-20 bg-category w-full text-center">
-    <h4 class="text-lg font-medium mb-4 text-surface">Find your subject</h4>
-    <h2 class=" text-3xl mb-12 font-bold bg-clip-text text-transparent bg-gradient-to-br from-background to-surface">
+<section class="pt-20 pb-20 bg-white w-full text-center">
+    <h4 class="text-lg font-medium mb-2 text-surface">Find your subject</h4>
+    <h2 class=" text-3xl mb-12 font-bold bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface">
         Browse a Specific Category</h2>
     {{-- <div class="slider w-full overflow-hidden relative">
         <div class="slides flex gap-6 transition-transform duration-500 ease-in-out">
@@ -29,14 +29,17 @@
                 <div class="embla__container">
                     @foreach ($categories as $category)
                         <div class="embla__slide ">
-                            <a class="relative" href="/categories/{{ $category->slug }}/quizzes">
+                            <a href="/categories/{{ $category->slug }}/quizzes">
 
-                                <img class="embla__slide__img rounded-xl border-2 border-solid border-background"
+                                <img class="embla__slide__img rounded-tr-lg rounded-tl-lg  border-solid border-background drop-shadow-sm"
                                     src="{{ asset("storage/categories/{$category->thumbnail}") }}"
                                     alt="Your alt text" />
-                                <div class="absolute bg-surface w-full h-auto"></div>
+                                <div class="bg-faint  border-background py-2 rounded-bl-lg rounded-br-lg">
+                                    <p class="text-background text-sm tracking-wide font-normal">{{ $category->name }}
+                                    </p>
+                                </div>
                             </a>
-                            <p>{{ $category->name }}</p>
+
                         </div>
                     @endforeach
                 </div>

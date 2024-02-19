@@ -3,8 +3,8 @@
 
     <form method="GET" action="/quizzes" class="">
         <input type="search" name="search"
-            class="placeholder-background/40 text-background bg-faintest rounded w-96 pl-4 h-10 items-center max-w-48 text-sm"
-            placeholder="Search">
+            class="placeholder-background/40 text-background bg-faintest rounded w-96 pl-4 pr-2 h-10 items-center max-w-60 text-sm appearance-none"
+            placeholder="Search for a quiz">
     </form>
 
 
@@ -55,15 +55,4 @@
         </div>
         <input type="hidden" x-model="selectedOption.id" name="category_id" x-bind:value="selectedOption.id" />
     </div>
-
-    {{--     
-    <a href="/quizzes/random" class="px-6 py-4 bg-surface rounded-xl text-xl">Random Quiz</a>
-    or --}}
-
-    {{-- @auth
-        <a href="/quizzes/create" class="px-6 py-4 bg-surface rounded-xl text-xl">Create your own
-            quiz!</a>
-    @else
-        <p class="mt-8">Log in to create a quiz!</p>
-    @endauth --}}
 </div>

@@ -5,7 +5,7 @@
         required>
     @if (!session("selectedAnswers.$questionId"))
         <label for="{{ $answer->id }}"
-            class="text-sm pl-2 block w-full rounded-md py-2 text-background/80 ring-1 ring-inset ring-faint focus:ring-1 rounded-lg cursor-pointer hover:text-gray-600 hover:bg-faintest hover:text-background hover:bg-white transition duration-500 peer-checked:ring-surface peer-checked:bg-faintest peer-checked:text-surface {{ $index === 0 ? '' : 'mt-3' }}">
+            class="text-sm pl-2 block w-full rounded-md py-2 text-background/80 ring-1 ring-inset ring-background/10 focus:ring-1 rounded-lg cursor-pointer hover:text-gray-600 hover:bg-faintest hover:text-background hover:bg-white transition duration-500 peer-checked:ring-surface peer-checked:bg-faintest peer-checked:text-surface {{ $index === 0 ? '' : 'mt-3' }}">
         @else
             @if (session("selectedAnswers.$questionId") == $answer->id)
                 {{-- this is the selected answer. --}}

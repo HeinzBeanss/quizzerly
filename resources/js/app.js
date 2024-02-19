@@ -19,16 +19,13 @@ window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
 
     if (scrollY > 160) {
-        navbar.classList.add('bg-background'); // Add your desired background color class
-        navbar.classList.remove('backdrop-blur'); // Remove backdrop blur class
+        navbar.classList.add('bg-background');
+        navbar.classList.remove('backdrop-blur');
     } else {
-        navbar.classList.remove('bg-background'); // Remove background color class
-        navbar.classList.add('backdrop-blur'); // Add backdrop blur class
+        navbar.classList.remove('bg-background');
+        navbar.classList.add('backdrop-blur');
     }
 });
-
-
-
 
 // Quiz Functionality
 const mainQuestionContainer = document.getElementById('question-container');

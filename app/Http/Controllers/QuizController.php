@@ -61,7 +61,7 @@ class QuizController extends Controller
     public function store()
     {
         $quizAttributes = request()->validate([
-            'name' => 'required|max:255|unique:quizzes,name',
+            'name' => 'required|max:64|unique:quizzes,name',
             'thumbnail' => 'image',
             'description' => 'required|max:255',
             'category_id' => 'required|numeric',
@@ -211,7 +211,7 @@ class QuizController extends Controller
 
     public function popular() {
         return view('quizzes.popular', [
-            'quizzes' => Quiz::with('user')->orderBy('times_taken', 'desc')->paginate(10),
+            'quizzes' => Quiz::with('user')->orderBy('times_taken', 'desc')->paginate(7),
             'categories' => Category::all(),
         ]);
     }
