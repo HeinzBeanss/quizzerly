@@ -23,6 +23,29 @@ class RegisterController extends Controller
         ]));
 
         auth()->login($user);
-        return redirect('/home')->with('success', 'Your account has been created.');
+        return redirect('/')->with('success', 'Your account has been created.');
+    }
+
+    public function delete(User $user) {
+
+        if ($user->id === auth()->user()->id) {
+            return view('register.delete');  
+        } else {
+            return back()->with('success', 'Oops! I don\'t think you have permission for that.');
+        }
+          
+    }
+
+    public function destroy(User $user) {
+
+        if ($user->id === auth()->user()->id) {
+        // log out + delete user.
+        auth()->logout();
+        $user->delete();
+
+        return redirect('/')->with('success', 'Your account has been deleted');
+        } else {
+            return back()->with('success', 'Oops! I don\'t think you have permission for that.');
+        }
     }
 }

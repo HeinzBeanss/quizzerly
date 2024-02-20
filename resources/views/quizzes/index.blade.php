@@ -1,6 +1,5 @@
 <x-layout :pagetitle="'Quizzerly - All Quizzes'">
-
-    {{-- make into component accepting a height variable i guess? --}}
+    <x-announcement-bar />
     <x-gradient-background height="h-250" />
     <x-header />
 
@@ -22,7 +21,7 @@
 
     <section class="bg-white text-background border-background border-t-0">
         <div class="w-2/3 mx-auto text-white pt-16 pb-20">
-            <div class="lg:grid lg:grid-cols-6 gap-12 mt-0 mb-4">
+            <div class="lg:grid lg:grid-cols-6 gap-16 mt-0 mb-4">
                 @foreach ($quizzes->skip(1) as $quiz)
                     <x-quiz-preview :quiz="$quiz" />
                 @endforeach

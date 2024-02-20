@@ -6,7 +6,17 @@
 
     <a href="/quizzes/{{ $quiz->slug }}">
         <div
-            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 opacity-85 hover:opacity-0 transition-opacity duration-700">
+            class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 opacity-85 hover:opacity-100 transition-opacity duration-500">
+        </div>
+        <div
+            class="absolute top-0 right-0  p-2 m-4 flex flex-col justfify-center items-center gap-1 bg-background/95 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-award">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+            </svg>
+            <p class="text-sm font-thin">Plays: {{ $quiz->times_taken }}</p>
         </div>
     </a>
 

@@ -103,7 +103,17 @@
 
         <a href="/quizzes/{{ $quiz->slug }}">
             <div
-                class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 hover:opacity-0 transition-opacity duration-700 opacity-40">
+                class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 hover:opacity-0 transition-opacity duration-700 opacity-50">
+            </div>
+            <div
+                class="absolute bottom-0 right-0  p-2 m-2 flex flex-col justfify-center items-center gap-1 bg-black/90 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-award">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+                <p class="text-sm font-thin">Plays: {{ $quiz->times_taken }}</p>
             </div>
         </a>
         <a href="/quizzes/{{ $quiz->slug }}">
@@ -123,7 +133,7 @@
                 </a>
             </p>
         </div>
-        <p class="z-10 line-clamp-2 overflow-hidden overflow-ellipsis text-background text-sm leading-snug mt-1">
+        <p class="z-10 line-clamp-2 overflow-hidden overflow-ellipsis text-background/80 text-sm leading-snug mt-1">
             {{ $quiz->description }}</p>
     </div>
 </div>

@@ -4,7 +4,7 @@ import './bootstrap';
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
-if (window.location.pathname === '/home') {
+if (window.location.pathname === '/') {
     const OPTIONS = { slidesToScroll: 4, dragFree: true, loop: true, autoplay: true, }
 
     const emblaNode = document.querySelector('.embla')
@@ -61,7 +61,7 @@ window.addQuestion = () => {
     questionInput.name = `question[${thisQuestion}][0]`;
     questionInput.setAttribute('required', "true");
     questionInput.setAttribute('placeholder', "Who painted the Mona Lisa?");
-    questionInput.classList.add('pl-2', 'block', 'w-full', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-faint', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'mb-2', 'placeholder-background/40');
+    questionInput.classList.add('pl-2', 'block', 'w-full', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-background/10', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'mb-2', 'placeholder-background/40');
 
     // Answer Section Title
     const answersectiontitle = document.createElement('label');
@@ -92,7 +92,7 @@ window.addQuestion = () => {
     answerInput.name = `question[${thisQuestion}][1]`;
     answerInput.setAttribute('required', "true");
     answerInput.setAttribute('placeholder', "Leonardo da Vinci");
-    answerInput.classList.add('max-h-24', 'pl-2', 'block', 'w-full', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-faint', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'placeholder-background/40');
+    answerInput.classList.add('max-h-24', 'pl-2', 'block', 'w-full', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-background/10', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'placeholder-background/40');
     answerContainerOne.appendChild(answerInput);
     questionContainerBottom.appendChild(answerContainerOne);
 
@@ -110,7 +110,7 @@ window.addQuestion = () => {
     answerInputTwo.name = `question[${thisQuestion}][2]`;
     answerInputTwo.setAttribute('required', "true");
     answerInputTwo.setAttribute('placeholder', "Keanu Reeves");
-    answerInputTwo.classList.add('max-h-24', 'pl-2', 'block', 'w-full', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-faint', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'placeholder-background/40');
+    answerInputTwo.classList.add('max-h-24', 'pl-2', 'block', 'w-full', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-background/10', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'placeholder-background/40');
     answerContainerTwo.appendChild(answerInputTwo);
     questionContainerBottom.appendChild(answerContainerTwo);
 
@@ -167,7 +167,7 @@ window.addAnswer = (thisQuestion) => {
     const answerInputDynamic = document.createElement('input');
     answerInputDynamic.type = "text";
     answerInputDynamic.name = `question[${thisQuestion}][${answerCount}]`;
-    answerInputDynamic.classList.add('w-full', 'transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'pl-2', 'block', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-faint', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'placeholder-background/40');
+    answerInputDynamic.classList.add('w-full', 'transition-all', 'opacity-0', 'duration-500', 'ease-out', 'max-h-0', 'pl-2', 'block', 'rounded-md', 'border-0', 'py-1.5', 'text-background/80', 'shadow-sm', 'ring-1', 'ring-inset', 'ring-background/10', 'focus:ring-1', 'focus:outline-0', 'focus:ring-surface', 'sm:text-sm', 'sm:leading-6', 'placeholder-background/40');
     answerInputDynamic.setAttribute('required', 'true');
     answerInputDynamic.setAttribute('placeholder', 'Other Incorrect Answer');
 

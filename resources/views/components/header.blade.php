@@ -6,7 +6,7 @@
                 Quizzerly</h1>
         </a>
         <div class="text-words flex gap-6 text-sm font-normal ">
-            <a class="pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/home">HOME</a>
+            <a class="pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/">HOME</a>
             <a class="pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/quizzes">ALL QUIZZES</a>
             <a class="pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/quizzes/popular">POPULAR</a>
             <a class="pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/quizzes/random">RANDOM</a>

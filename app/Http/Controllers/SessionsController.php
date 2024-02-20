@@ -25,12 +25,12 @@ class SessionsController extends Controller
         }
 
         session()->regenerate();
-        return redirect('/home')->with('success', 'Welcome back ' . ucwords(auth()->user()->name) . '!');
+        return redirect('/')->with('success', 'Welcome back ' . ucwords(auth()->user()->name) . '!');
     }
 
     public function destroy()
     {
         auth()->logout();
-        return redirect('/home')->with('success', 'You\'ve been logged out. Goodbye!');
+        return redirect('/')->with('success', 'You\'ve been logged out. Goodbye!');
     }
 }

@@ -22,13 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Welcome
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Quizzes
-Route::get('home', [QuizController::class, 'home']);
+Route::get('', [QuizController::class, 'home']);
 Route::get('quizzes', [QuizController::class, 'index']);
 Route::get('quizzes/create', [QuizController::class, 'create'])->middleware('auth');
 Route::post('quizzes/store', [QuizController::class, 'store'])->middleware('auth');
@@ -49,6 +44,9 @@ Route::get('categories/{category:slug}/quizzes', [CategoryController::class, 'in
 // Authentication / User
 Route::get('register', [RegisterController::class, 'create']);
 Route::post('register', [RegisterController::class, 'store']);
+route::get('/users/{user:username}/delete', [RegisterController::class, 'delete']);
+Route::delete('/users/{user:username}', [RegisterController::class, 'destroy']);
+
 Route::get('login', [SessionsController::class, 'create'])->name('login');
 Route::post('login', [SessionsController::class, 'store'])->name('login');
 Route::delete('logout', [SessionsController::class, 'destroy'])->name('logout');

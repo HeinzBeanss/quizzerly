@@ -1,5 +1,5 @@
 <x-layout :pagetitle="'Quizzerly - Popular'">
-    {{-- make into component accepting a height variable i guess? --}}
+    <x-announcement-bar />
     <x-gradient-background height="h-250" />
     <x-header />
 

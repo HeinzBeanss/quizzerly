@@ -5,7 +5,7 @@
         <label for="question_0" class="block text-sm font-medium leading-6 text-background/80">Question Title</label>
     </div>
     <input type="text" name="question[{{ $index }}][0]" required
-        class="pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-faint focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 mb-2 placeholder-background/50"
+        class="pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-background/10 focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 mb-2 placeholder-background/50"
         value="{{ $question->name }}">
 
     <label class="block text-sm font-medium leading-6 text-background/80">Answers</label>
@@ -21,11 +21,11 @@
 
                 @if ($answerIndex + 1 === 1 || $answerIndex + 1 === 2)
                     <input type="text" name="question[{{ $index }}][{{ $answerIndex + 1 }}]" required
-                        class="max-h-9 pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-faint focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 placeholder-background/50"
+                        class="max-h-9 pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-background/10 focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 placeholder-background/50"
                         value="{{ $answer->name }}">
                 @else
                     <input type="text" name="question[{{ $index }}][{{ $answerIndex + 1 }}]" required
-                        class="max-h-9 pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-faint focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 placeholder-background/50"
+                        class="max-h-9 pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-background/10 focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 placeholder-background/50"
                         value="{{ $answer->name }}">
                     <img src={{ asset('storage/svg/trash.svg') }} alt="delete answer"
                         class="bg-white transition-all duration-500 ease-out rounded-xl max-h-8 cursor-pointer"

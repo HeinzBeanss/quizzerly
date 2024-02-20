@@ -1,7 +1,7 @@
 <x-layout :pagetitle="'Quizzerly - Register'">
     <x-gradient-background height="h-screen" />
 
-    <a href="/home">
+    <a href="/">
         <h1 class="absolute top-4 left-4 text-4xl text-words hover:text-white transition duration-500 ease-in z-40">
             Quizzerly</h1>
     </a>

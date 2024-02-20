@@ -1,5 +1,5 @@
 <x-layout :pagetitle="$quiz->name">
-
+    <x-announcement-bar />
     <x-gradient-background height="h-200" />
     <x-header />
 
@@ -84,7 +84,7 @@
                             class="flex bg-faint px-4 py-4 rounded-lg mb-4 gap-4 items-start justify-start comment-container">
                             <img class="w-12 rounded-md"
                                 src="{{ asset("storage/profile_pictures/{$comment->author->profile_picture}") }}"
-                                alt="">
+                                alt="{{ $comment->author->name }}">
                             <div class="right w-full">
                                 <p class="text-sm font-medium leading-6 text-background/80">
                                     {{ $comment->author->name }}

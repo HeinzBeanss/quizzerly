@@ -3,7 +3,7 @@
     <x-gradient-background height="h-300" />
     <x-header />
 
-    <section class="relative text-faintest pt-16 pb-32 ">
+    <section class="relative text-faintest pt-16 pb-32">
 
         <x-search-area :categories="$categories" />
 
