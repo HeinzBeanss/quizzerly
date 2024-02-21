@@ -34,8 +34,9 @@
                                 <img class="embla__slide__img rounded-tr-lg rounded-tl-lg  border-solid border-background drop-shadow-sm"
                                     src="{{ asset("storage/categories/{$category->thumbnail}") }}"
                                     alt="Your alt text" />
-                                <div class="bg-faint  border-background py-2 rounded-bl-lg rounded-br-lg">
-                                    <p class="text-background text-sm tracking-wide font-normal">{{ $category->name }}
+                                <div
+                                    class="bg-faint border-background py-2 rounded-bl-lg rounded-br-lg hover:bg-lighter hover:text-faintest transition-colors duration-100">
+                                    <p class="text-sm tracking-wide font-normal">{{ $category->name }}
                                     </p>
                                 </div>
                             </a>

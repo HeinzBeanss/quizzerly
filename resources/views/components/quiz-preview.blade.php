@@ -123,12 +123,13 @@
 
     </div>
     <div class="flex flex-col justify-start h-full">
-        <div class="flex gap-4 justify-between items-center z-10 mt-2 text-background">
+        <div class="flex gap-1 justify-between items-center z-10 mt-4 text-background">
             <a href="/quizzes/{{ $quiz->slug }}">
-                <h2 class="font-medium text-lg line-clamp-1 leading-snug overflow-hidden overflow-ellipsis max-w-1/2">
+                <h2
+                    class="font-medium text-lg line-clamp-1 leading-snug overflow-hidden overflow-ellipsis max-w-1/2 leading-none">
                     {{ ucwords($quiz->name) }}</h2>
             </a>
-            <p class="text-xs">
+            <p class="text-xs text-surface">
                 <a href="/users/{{ $quiz->user->username }}/profile" class="italic">{{ $quiz->user->name }}
                 </a>
             </p>

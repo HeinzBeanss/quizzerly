@@ -8,9 +8,11 @@
             <h2 class="text-3xl font-normal mb-2 text-faintest">Profile</h2>
 
             <div class="flex gap-4 bg-white rounded-lg px-4 py-4">
-                <img class="rounded-lg  max-w-64"
-                    src="{{ asset('storage/profile_pictures/' . auth()->user()->profile_picture) }}"
-                    alt="{{ auth()->user()->name }}">
+                <div class="min-w-64 h-64 flex items-center justify-center">
+                    <img class="w-full h-full rounded-lg object-cover"
+                        src="{{ asset('storage/profile_pictures/' . auth()->user()->profile_picture) }}"
+                        alt="{{ auth()->user()->name }}">
+                </div>
 
 
                 <div class="flex flex-col justify-between w-full">
@@ -32,20 +34,40 @@
                         <p class="text-background/70 text-sm">Total Plays of User Quizzes: {{ $totalPlays }}</p>
                     </div>
 
-                    <div class="profilebuttoncontainer flex gap-4 min-w-full">
-                        @if ($user->id === auth()->user()->id)
-                            <button
-                                class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow">Change
-                                Picture</button>
-                            <a href="/quizzes/create"
-                                class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow flex justify-center items-center cursor-pointer">
-                                Create Quiz
-                            </a>
-                            <a class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:text-white hover:from-red-400 hover:to-red-900 hover:shadow flex justify-center items-center"
-                                href="/users/{{ auth()->user()->username }}/delete">Delete
-                                Account
-                            </a>
-                        @endif
+                    <div class="flex flex-col w-full">
+                        @error('profile_picture')
+                            <p class="text-xs text-red-500"> {{ $errors->first('profile_picture') }}</p>
+                        @enderror
+                        <div class="profilebuttoncontainer flex gap-4 w-full">
+                            @if ($user->id === auth()->user()->id)
+                                <form id="profile-form" class="w-full" action="/users/{user:username}/update"
+                                    enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input id="profile-picture-file" type="file" class="hidden w-full"
+                                        name="profile_picture" accept="image/*" value="{{ old('profile_picture') }}" />
+                                    <label for="profile-picture-file"
+                                        class="block mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow text-center">Change
+                                        Picture</label>
+                                </form>
+                                {{-- Javascript for Form Submission --}}
+                                <script>
+                                    const profileFileInput = document.getElementById('profile-picture-file');
+                                    profileFileInput.addEventListener('change', function() {
+                                        const form = document.getElementById('profile-form');
+                                        form.submit();
+                                    });
+                                </script>
+                                <a href="/quizzes/create"
+                                    class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow flex justify-center items-center cursor-pointer">
+                                    Create Quiz
+                                </a>
+                                <a class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:text-white hover:from-red-400 hover:to-red-900 hover:shadow flex justify-center items-center"
+                                    href="/users/{{ auth()->user()->username }}/delete">Delete
+                                    Account
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,7 +76,7 @@
     </section>
 
     <section class="bg-faint text-background border-background border-t-0">
-        <div class="w-2/3 mx-auto text-white pt-20 pb-4">
+        <div class="w-2/3 mx-auto text-white pt-20 pb-8">
             <h2
                 class="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface mb-2">
                 User Quizzes</h2>
@@ -67,4 +89,6 @@
 
         </div>
     </section>
+
+    <x-footer />
 </x-layout>

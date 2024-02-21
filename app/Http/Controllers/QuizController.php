@@ -7,14 +7,12 @@ use App\Models\Category;
 use App\Models\Question;
 use App\Models\Quiz;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class QuizController extends Controller
 {
     public function home()
     {
-
         $featuredquiz = Quiz::where('created_at', '>=', Carbon::now()->subWeek())
                     ->orderBy('times_taken', 'desc')
                     ->first();
@@ -40,7 +38,6 @@ class QuizController extends Controller
 
     public function show(Quiz $quiz)
     {
-
         return view('quizzes.show', [
             'quiz' => Quiz::with([
                 'questions.answers' => function ($query) {
@@ -62,7 +59,7 @@ class QuizController extends Controller
     {
         $quizAttributes = request()->validate([
             'name' => 'required|max:64|unique:quizzes,name',
-            'thumbnail' => 'image',
+            'thumbnail' => 'image|max:2048|dimensions:min_width=720,min_height=400',
             'description' => 'required|max:255',
             'category_id' => 'required|numeric',
         ]);
@@ -77,14 +74,12 @@ class QuizController extends Controller
         $quiz = Quiz::create($quizAttributes);
 
         foreach (request('question') as $i => $requestQuestion) {
-
             request()->validate([
                 "question.$i.0" => 'string|required',
             ], [
-                "question.$i.0.required" => "The question is required.",
-                "question.$i.0.string" => "The question must be a string.",
+                "question.$i.0.required" => 'The question is required.',
+                "question.$i.0.string" => 'The question must be a string.',
             ]);
-
 
             $questionAttributes['quiz_id'] = $quiz->id;
             $questionAttributes['name'] = $requestQuestion[0];
@@ -92,12 +87,11 @@ class QuizController extends Controller
             $question = Question::create($questionAttributes);
 
             foreach ($requestQuestion as $j => $requestAnswer) {
-
                 request()->validate([
                     "question.$i.$j" => 'string|required',
                 ], [
-                    "question.$i.$j.required" => "The answer is required.",
-                    "question.$i.$j.string" => "The answer must be a string.",
+                    "question.$i.$j.required" => 'The answer is required.',
+                    "question.$i.$j.string" => 'The answer must be a string.',
                 ]);
 
                 if ($j === 0) {
@@ -119,7 +113,6 @@ class QuizController extends Controller
 
         return redirect("/quizzes/$quiz->slug")->with('success', 'Quiz successfully created.');
         // maybe add with a success message: Quiz successfully created.
-
     }
 
     public function edit(Quiz $quiz)
@@ -132,10 +125,9 @@ class QuizController extends Controller
 
     public function update(Quiz $quiz)
     {
-
         $quizAttributes = request()->validate([
             'name' => "required|max:255|unique:quizzes,name,$quiz->id",
-            'thumbnail' => 'image',
+            'thumbnail' => 'image|max:2048|dimensions:min_width=720,min_height=400',
             'description' => 'required|max:255',
             'category_id' => 'required|numeric',
         ]);
@@ -150,14 +142,12 @@ class QuizController extends Controller
         $quiz->update($quizAttributes);
         $quiz->questions()->delete();
 
-
         foreach (request('question') as $i => $requestQuestion) {
-
             request()->validate([
                 "question.$i.0" => 'string|required',
             ], [
-                "question.$i.0.required" => "The question is required.",
-                "question.$i.0.string" => "The question must be a string.",
+                "question.$i.0.required" => 'The question is required.',
+                "question.$i.0.string" => 'The question must be a string.',
             ]);
 
             $questionAttributes['quiz_id'] = $quiz->id;
@@ -166,12 +156,11 @@ class QuizController extends Controller
             $question = Question::create($questionAttributes);
 
             foreach ($requestQuestion as $j => $requestAnswer) {
-
                 request()->validate([
                     "question.$i.$j" => 'string|required',
                 ], [
-                    "question.$i.$j.required" => "The answer is required.",
-                    "question.$i.$j.string" => "The answer must be a string.",
+                    "question.$i.$j.required" => 'The answer is required.',
+                    "question.$i.$j.string" => 'The answer must be a string.',
                 ]);
 
                 if ($j === 0) {
@@ -191,25 +180,25 @@ class QuizController extends Controller
             }
         };
 
-                return redirect('/users/' . auth()->user()->username .  '/profile')->with('success', 'Quiz successfully updated.');
+        return redirect('/users/' . auth()->user()->username . '/profile')->with('success', 'Quiz successfully updated.');
     }
 
     public function destroy(Quiz $quiz)
     {
         $quiz->delete();
 
-        return redirect('/users/' . auth()->user()->username .  '/profile');
+        return redirect('/users/' . auth()->user()->username . '/profile');
     }
 
     public function random()
     {
-
         $randomQuiz = Quiz::inRandomOrder()->first();
 
         return redirect("/quizzes/$randomQuiz->slug");
     }
 
-    public function popular() {
+    public function popular()
+    {
         return view('quizzes.popular', [
             'quizzes' => Quiz::with('user')->orderBy('times_taken', 'desc')->paginate(7),
             'categories' => Category::all(),
@@ -218,7 +207,6 @@ class QuizController extends Controller
 
     public function complete()
     {
-
         $quiz = Quiz::with('questions', 'questions.answers')->findOrFail(request('quiz_id'));
 
         $correctAnswersScore = 0;
@@ -227,7 +215,6 @@ class QuizController extends Controller
 
         foreach ($quiz->questions as $question) {
             foreach ($question->answers as $answer) {
-
                 // Get the selected answer,.
                 $selectedAnswerId = request($question->id);
                 $selectedAnswersArray[$question->id] = $selectedAnswerId;

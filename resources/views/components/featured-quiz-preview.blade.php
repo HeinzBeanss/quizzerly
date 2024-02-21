@@ -31,6 +31,6 @@
                 </a>
             </p>
         </div>
-        <p class="mt-2 z-10">{{ $quiz->description }}</p>
+        <p class="mt-1 z-10 font-thin leading-5">{{ $quiz->description }}</p>
     </div>
 </div>

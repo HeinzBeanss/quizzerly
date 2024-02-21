@@ -44,12 +44,13 @@ Route::get('categories/{category:slug}/quizzes', [CategoryController::class, 'in
 // Authentication / User
 Route::get('register', [RegisterController::class, 'create']);
 Route::post('register', [RegisterController::class, 'store']);
-route::get('/users/{user:username}/delete', [RegisterController::class, 'delete']);
-Route::delete('/users/{user:username}', [RegisterController::class, 'destroy']);
+route::get('/users/{user:username}/delete', [RegisterController::class, 'delete'])->middleware('auth');
+Route::delete('/users/{user:username}', [RegisterController::class, 'destroy'])->middleware('auth');
+Route::patch('/users/{user:username}/update', [RegisterController::class, 'update'])->middleware('auth');
 
 Route::get('login', [SessionsController::class, 'create'])->name('login');
 Route::post('login', [SessionsController::class, 'store'])->name('login');
-Route::delete('logout', [SessionsController::class, 'destroy'])->name('logout');
+Route::delete('logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
 
 Route::get('users/{user:username}/profile', [ProfileController::class, 'show']);
 // Maybe edit Profile too later down the line.

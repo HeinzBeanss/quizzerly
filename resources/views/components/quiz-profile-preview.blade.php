@@ -41,7 +41,7 @@
 
     @auth
         @if ($user->id == auth()->user()->id)
-            <div class="profilequizbuttoncontainer w-full flex flex-row gap-4 justify-between">
+            <div class="profilequizbuttoncontainer w-full flex flex-row gap-4 justify-between mt-1">
                 <a class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow text-center"
                     href="/quizzes/{{ $quiz->slug }}/edit">Edit
                     Quiz</a>

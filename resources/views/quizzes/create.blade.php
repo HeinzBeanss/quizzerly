@@ -1,6 +1,6 @@
 <x-layout :pagetitle="'Quizzerly - Create a Quiz'">
 
-    <x-gradient-background height="h-full" />
+    <x-gradient-background height="h-[calc(100%_-_4rem)]" />
     <x-header />
 
     <section class="relative text-faintest pt-16 pb-32">
@@ -70,5 +70,5 @@
 
         </div>
     </section>
-
+    <x-footer />
 </x-layout>

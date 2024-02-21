@@ -29,14 +29,14 @@
             <div class="flex gap-16">
                 <div class="flex flex-col w-full">
                     <h2
-                        class="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface mb-2">
+                        class="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/75 to-lighter mb-2">
                         New Quizzes</h2>
                     <x-quiz-preview :quiz="$quizzes[0]" />
                 </div>
 
                 <div class="flex flex-col w-1/2">
                     <h3
-                        class="text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface mb-3">
+                        class="text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/75 to-lighter mb-3">
                         Top Quizzes</h3>
                     <x-top-quizzes :topquizzes="$topquizzes" />
                 </div>
@@ -56,7 +56,7 @@
 
 
 
-        <div class="w-full mx-auto flex justify-center pb-16">
+        <div class="w-full mx-auto flex justify-center pb-8">
             <a class="px-10 py-5 bg-gradient-to-br from-lighter/90 via-surface to-background/70 text-white rounded-md min-w-40 text-normal font-light tracking-wide border border-white"
                 href="/quizzes">Browse More Quizzes</a>
         </div>

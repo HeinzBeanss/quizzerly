@@ -10,11 +10,14 @@
             <p class="mb-2 text-sm text-background dark:text-background"><span class="font-semibold">Click to
                     upload</span>
                 or drag and drop</p>
-            <p id="file-name" class="text-xs text-background dark:text-background">SVG, PNG, JPG or GIF (MAX.
-                800x400px)</p>
+            <p id="file-name" class="text-xs text-background dark:text-background">SVG, PNG, JPG or GIF (MIN DIMENSIONS.
+                720x400px, MAX FILESIZE. 2MB)</p>
         </div>
         <input id="dropzone-file" type="file" class="hidden" name="thumbnail" accept="image/*"
             value="{{ old('thumbnail') }}" onchange="displayFileName(this)" />
+            @error('thumbnail')
+                <p class="text-xs text-red-500">{{ $message }}</p>
+            @enderror
     </label>
 </div>
 <script>

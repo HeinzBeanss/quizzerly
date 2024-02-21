@@ -3,7 +3,7 @@
 
     <form method="GET" action="/quizzes" class="">
         <input type="search" name="search"
-            class="placeholder-background/40 text-background bg-faintest rounded w-96 pl-4 pr-2 h-10 items-center max-w-60 text-sm appearance-none"
+            class="placeholder-background/40 text-background bg-white rounded w-96 pl-4 pr-2 h-10 items-center max-w-60 text-sm appearance-none"
             placeholder="Search for a quiz">
     </form>
 
@@ -29,7 +29,7 @@
         <!-- Button -->
         <button x-ref="button" x-on:click="toggle('Category / Theme')" :aria-expanded="open"
             :aria-controls="$id('dropdown-button')" type="button"
-            class="flex items-center gap-2 bg-faintest px-5 py-2.5 rounded-md shadow">
+            class="flex items-center gap-2 bg-white px-5 py-2.5 rounded-md shadow">
 
             <span class="text-sm">Browse a Category</span>
             <!-- Heroicon: chevron-down -->
@@ -44,11 +44,11 @@
         <!-- Panel -->
         <div x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)"
             :id="$id('dropdown-button')" style="display: none;"
-            class="absolute left-0 mt-2 w-40 rounded-md bg-faintest shadow-md z-50 ">
+            class="absolute left-0 mt-2 w-40 rounded-md bg-white shadow-md z-50 ">
 
             @foreach ($categories as $category)
                 <a href="/categories/{{ $category->slug }}/quizzes"
-                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-surface hover:text-faintest transition-colors duration-300">
+                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-faint transition-colors duration-100">
                     {{ $category->name }}
                 </a>
             @endforeach

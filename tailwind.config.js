@@ -32,7 +32,7 @@ export default {
         'words': '#B6CFCA',
         'primary': '#ffffff',
         'secondary': '#ffffff',
-        'faint': '#f9f9f9',
+        'faint': '#f7f7f7',
         'category': '#e3e9e4',
         'faintest': '#F0F7F6',
         'almostwhite': '#fcfcfc'
