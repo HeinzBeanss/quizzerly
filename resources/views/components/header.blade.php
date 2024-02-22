@@ -39,7 +39,7 @@
 
 {{-- Mobile --}}
 <nav id="navbar-mobile"
-    class="navbar hidden sticky top-0  w-full z-40 flex justify-between px-2  py-1 items-center backdrop-blur-md transition-all duration-1000 text-faintest">
+    class="navbar hidden sticky top-0  w-full z-40 flex justify-between px-3  py-2 items-center backdrop-blur-md transition-all duration-1000 text-faintest">
     <a href="/">
         <h1
             class="text-2xl text-faintest hover:bg-gradient-to-br from-surface to-words hover:bg-clip-text hover:text-transparent transition duration-200 ease-in ">

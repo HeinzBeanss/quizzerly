@@ -31,7 +31,7 @@
             :aria-controls="$id('dropdown-button')" type="button"
             class="flex items-center gap-2 bg-white px-5 py-2.5 rounded-md shadow">
 
-            <span class="text-sm">Browse a Category</span>
+            <span class="text-sm text-background/90">Browse a Category</span>
             <!-- Heroicon: chevron-down -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                 fill="currentColor">

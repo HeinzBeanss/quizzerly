@@ -1,10 +1,10 @@
 <x-layout :pagetitle="$quiz->name">
     <x-announcement-bar />
-    <x-gradient-background height="h-200" />
+    <x-gradient-background height="h-150 sm:h-200" />
     <x-header />
 
     <section class="relative text-faintest pt-16">
-        <div class="w-1/2 mx-auto">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8">
 
             <div class="flex gap-4 justify-between items-center">
                 <h2 class="text-3xl font-normal mb-2 text-faintest line-clamp-1 overflow-hidden overflow-ellipsis">
@@ -13,14 +13,14 @@
                     {{ ceil($quiz->average_score) }}%</p>
             </div>
 
-            <img class="w-full max-h-80 rounded-xl object-cover mb-8 bg-faintest"
+            <img class="w-full max-h-72 h-72 sm:max-h-80 sm:h-80 rounded-xl object-cover mb-8 bg-faintest"
                 src="{{ asset("storage/{$quiz->thumbnail}") }}" alt="Quiz Thumbnail">
 
         </div>
     </section>
 
     <section class="bg-white text-background border-background border-t-0">
-        <div class="w-1/2 mx-auto text-background pt-16 pb-4">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 text-background pt-8 sm:pt-16 pb-4">
 
             <form action="/quizzes/{{ $quiz->slug }}/complete" method="post" class="flex flex-col gap-1">
                 @csrf
@@ -30,10 +30,11 @@
                 @endforeach
 
         </div>
-        <div class="end-section-quiz rounded-lg bg-faint px-4 py-4 my-6 w-60 mx-auto flex flex-col justify-center">
+        <div
+            class="end-section-quiz rounded-lg bg-faint px-4 py-4 my-0 sm:my-6 w-60 mx-auto flex flex-col justify-center">
             @if (is_null(session('score')))
                 <button
-                    class="px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-normal font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow">Complete
+                    class="px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm sm:text-base font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow">Complete
                     Quiz</button>
             @else
                 <p class="text-background/80 w-full text-center">Your results:</p>
@@ -48,7 +49,7 @@
         </div>
         </form>
 
-        <div class="w-1/2 mx-auto text-background pt-4 pb-4">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 text-background pt-4 pb-4">
 
             <h3 class="text-lg text-background font-normal mb-1 mt-2">Comments</h3>
 
@@ -90,7 +91,7 @@
                                     {{ $comment->author->name }}
                                 </p>
                                 <p
-                                    class="block w-full rounded-md border-0 text-background/80 sm:text-sm sm:leading-6 placeholder-background/50">
+                                    class="block w-full rounded-md border-0 text-background/80 text-xs sm:text-sm sm:leading-6 placeholder-background/50">
                                     {{ $comment->body }}</p>
                             </div>
                         </div>

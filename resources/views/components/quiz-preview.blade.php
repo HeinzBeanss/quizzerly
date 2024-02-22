@@ -18,7 +18,7 @@
             </div>
         </a>
         <a href="/quizzes/{{ $quiz->slug }}">
-            <img class="w-full max-h-64 rounded-lg object-cover" src="{{ asset("storage/{$quiz->thumbnail}") }}"
+            <img class="w-full h-64 max-h-64 rounded-lg object-cover" src="{{ asset("storage/{$quiz->thumbnail}") }}"
                 alt="Quiz Thumbnail">
         </a>
 

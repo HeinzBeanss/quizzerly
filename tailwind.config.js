@@ -38,8 +38,10 @@ export default {
         'almostwhite': '#fcfcfc'
       },
       height: {
+        '150': '30rem',
         '200': '34rem',
         '250': '44rem',
+        '275': '45.5rem',
         '300': '48rem',
       },
       width: {
