@@ -3,7 +3,7 @@
     <x-gradient-background height="h-[calc(100%_-_4rem)]" />
     <x-header />
 
-    <section class="relative text-faintest pt-16 pb-8 md:pb-32">
+    <section class="relative text-faintest pt-16 pb-8 lg:pb-32">
         <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8">
             <h2 class="text-3xl font-normal mb-2 text-faintest">Edit Your Quiz</h2>
 

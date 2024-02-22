@@ -1,6 +1,6 @@
 <x-layout :pagetitle="'Quizzerly - All Quizzes'">
     <x-announcement-bar />
-    <x-gradient-background height="h-275 sm:h-250" />
+    <x-gradient-background height="h-275 md:h-250" />
     <x-header />
 
     <section class="relative text-faintest mt-16 mb-8 md:mb-16">

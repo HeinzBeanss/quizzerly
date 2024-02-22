@@ -90,7 +90,7 @@
                                     </span>
                                 @else
                                     <a href="{{ $url }}"
-                                        class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-background bg-faintest border border-background leading-5 hover:text-background focus:z-10 focus:outline-none focus:ring ring-background focus:border-blue-300 active:bg-background active:text-background transition ease-in-out duration-150"
+                                        class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-background bg-faintest border border-background leading-5 hover:text-background focus:z-10 focus:outline-none focus:ring ring-background focus:border-surface active:bg-surface active:text-white transition ease-in-out duration-150"
                                         aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                         {{ $page }}
                                     </a>

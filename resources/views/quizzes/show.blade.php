@@ -1,15 +1,16 @@
 <x-layout :pagetitle="$quiz->name">
     <x-announcement-bar />
-    <x-gradient-background height="h-150 sm:h-200" />
+    <x-gradient-background height="h-200 sm:h-200" />
     <x-header />
 
-    <section class="relative text-faintest pt-16">
+    <section class="relative text-faintest pt-16 mb-20 sm:mb-12">
         <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8">
 
-            <div class="flex gap-4 justify-between items-center">
-                <h2 class="text-3xl font-normal mb-2 text-faintest line-clamp-1 overflow-hidden overflow-ellipsis">
+            <div class="flex flex-col sm:flex-row sm:gap-4 justify-between items-center">
+                <h2
+                    class="text-lg sm:text-3xl font-normal mb-2 text-faintest leading-snug sm:line-clamp-1 overflow-hidden overflow-ellipsis">
                     {{ ucwords($quiz->name) }}</h2>
-                <p class="text-sm text-faintest tracking-wide line-clamp-1 min-w-36 ">Average Score:
+                <p class="text-sm text-faintest tracking-wide line-clamp-1 min-w-36 mb-1 sm:mb-0 ">Average Score:
                     {{ ceil($quiz->average_score) }}%</p>
             </div>
 
@@ -37,13 +38,13 @@
                     class="px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm sm:text-base font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow">Complete
                     Quiz</button>
             @else
-                <p class="text-background/80 w-full text-center">Your results:</p>
-                <p class="text-background/80 w-full text-2xl font-medium text-center">
+                <p class="text-sm sm:text-base text-background/80 w-full text-center">Your results:</p>
+                <p class="text-lg text-background/80 w-full sm:text-2xl font-medium text-center">
                     {{ ceil(session('percentage')) }}%</p>
-                <p class="text-background/80 w-full text-center mb-2">{{ session('score') }} of
+                <p class="text-sm sm:text-base text-background/80 w-full text-center mb-2">{{ session('score') }} of
                     {{ count(session('correctAnswers')) }} questions correct.</p>
 
-                <a class="text-center px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-normal font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow"
+                <a class="text-center px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm sm:text-base font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow"
                     href="/quizzes">Find more quizzes</a>
             @endif
         </div>

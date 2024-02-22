@@ -16,7 +16,7 @@
     <title>{{ $pagetitle }}</title>
 </head>
 
-<body class="relative bg-background max-w-full h-full font-rubik">
+<body class="relative bg-white max-w-full h-full font-rubik">
 
     {{ $slot }}
 

@@ -62,7 +62,7 @@
                                     class="mt-2 px-3 py-2 lg:px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow flex justify-center items-center cursor-pointer">
                                     Create Quiz
                                 </a>
-                                <a class="mt-2 px-3 py-2 lg:px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:text-white hover:from-red-400 hover:to-red-900 hover:shadow flex justify-center items-center"
+                                <a class="mt-2 px-3 py-2 lg:px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:text-white hover:from-red-400 hover:to-red-900 hover:shadow flex justify-center items-center text-center"
                                     href="/users/{{ auth()->user()->username }}/delete">Delete
                                     Account
                                 </a>
