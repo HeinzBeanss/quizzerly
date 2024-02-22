@@ -1,9 +1,9 @@
 @props(['categories'])
-<div class="w-full m-auto flex justify-center gap-4 pb-12">
+<div class="w-full m-auto flex md:flex-row flex-col items-center justify-center gap-4 pb-12">
 
-    <form method="GET" action="/quizzes" class="">
+    <form class="order-last md:order-first" method="GET" action="/quizzes" class="">
         <input type="search" name="search"
-            class="placeholder-background/40 text-background bg-white rounded w-96 pl-4 pr-2 h-10 items-center max-w-60 text-sm appearance-none"
+            class="placeholder-background/40 text-background bg-white rounded-md w-96 pl-4 pr-2 h-10 items-center max-w-60 text-sm appearance-none"
             placeholder="Search for a quiz">
     </form>
 

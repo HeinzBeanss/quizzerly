@@ -12,7 +12,7 @@ class CategoryController extends Controller
         return view('categories.index', [
             'category' => $category,
             'categories' => Category::all(),
-            'quizzes' => $category->quizzes()->paginate(8),
+            'quizzes' => $category->quizzes()->latest()->paginate(7),
             'topQuizzes' => $category->quizzes()->orderBy('times_taken', 'desc')->take(5)->get(),
         ]);
     }

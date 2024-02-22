@@ -28,8 +28,7 @@ filter: invert(27%) sepia(84%) saturate(7266%) hue-rotate(169deg) brightness(94%
   min-width: 0;
   padding-left: var(--slide-spacing);
   position: relative;
-  max-width: 25%;
-
+  max-width: 30%;
 }
 .embla__slide__img {
   display: block;
@@ -72,3 +71,15 @@ filter: invert(27%) sepia(84%) saturate(7266%) hue-rotate(169deg) brightness(94%
   bottom: 0;
 }
 
+/* Media query for a breakpoint at 768px */
+@media screen and (max-width: 768px) {
+.embla__slide {
+  max-width: 50%;
+}
+}
+
+@media screen and (max-width: 640px) {
+.embla__slide {
+  max-width: 95%;
+}
+}

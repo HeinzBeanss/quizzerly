@@ -22,15 +22,16 @@
 
 
     <div class="flex flex-col justify-end h-full text-faintest">
-        <div class="flex justify-between items-center z-20">
+        <div class="flex justify-between items-center z-20 gap-2">
             <a href="/quizzes/{{ $quiz->slug }}">
-                <h2 class="text-2xl">{{ ucwords($quiz->name) }}</h2>
+                <h2 class="md:text-2xl sm:text-md line-clamp-1">{{ ucwords($quiz->name) }}</h2>
             </a>
-            <p class="text-xs">Created by
+            <p class="hidden sm:block sm:text-xs">Created by
                 <a href="/users/{{ $quiz->user->username }}/profile" class="italic">{{ $quiz->user->name }}
                 </a>
             </p>
         </div>
-        <p class="mt-1 z-10 font-thin leading-5">{{ $quiz->description }}</p>
+        <p class="text-xs md:text-sm mt-1 z-10 font-thin leading-5 line-clamp-2">{{ $quiz->description }}
+        </p>
     </div>
 </div>

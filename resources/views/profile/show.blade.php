@@ -1,13 +1,13 @@
 <x-layout :pagetitle="ucwords($user->name)">
 
-    <x-gradient-background height="h-200" />
+    <x-gradient-background height="h-250 md:h-200" />
     <x-header />
 
-    <section class="relative text-faintest pt-16 pb-16">
-        <div class="w-1/2 mx-auto">
+    <section class="relative text-faintest pt-16 pb-6 md:pb-16">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8">
             <h2 class="text-3xl font-normal mb-2 text-faintest">Profile</h2>
 
-            <div class="flex gap-4 bg-white rounded-lg px-4 py-4">
+            <div class="flex flex-col md:flex-row gap-4 bg-white rounded-lg px-4 py-4">
                 <div class="min-w-64 h-64 flex items-center justify-center">
                     <img class="w-full h-full rounded-lg object-cover"
                         src="{{ asset('storage/profile_pictures/' . auth()->user()->profile_picture) }}"
@@ -47,7 +47,7 @@
                                     <input id="profile-picture-file" type="file" class="hidden w-full"
                                         name="profile_picture" accept="image/*" value="{{ old('profile_picture') }}" />
                                     <label for="profile-picture-file"
-                                        class="block mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow text-center">Change
+                                        class="block mt-2 px-3 py-2 lg:px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow text-center line-clamp-1">Change
                                         Picture</label>
                                 </form>
                                 {{-- Javascript for Form Submission --}}
@@ -59,10 +59,10 @@
                                     });
                                 </script>
                                 <a href="/quizzes/create"
-                                    class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow flex justify-center items-center cursor-pointer">
+                                    class="mt-2 px-3 py-2 lg:px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:from-lighter hover:to-background/70 hover:shadow flex justify-center items-center cursor-pointer">
                                     Create Quiz
                                 </a>
-                                <a class="mt-2 px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:text-white hover:from-red-400 hover:to-red-900 hover:shadow flex justify-center items-center"
+                                <a class="mt-2 px-3 py-2 lg:px-4 py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm text-white font-light tracking-wide hover:text-white hover:from-red-400 hover:to-red-900 hover:shadow flex justify-center items-center"
                                     href="/users/{{ auth()->user()->username }}/delete">Delete
                                     Account
                                 </a>
@@ -76,12 +76,12 @@
     </section>
 
     <section class="bg-faint text-background border-background border-t-0">
-        <div class="w-2/3 mx-auto text-white pt-20 pb-8">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 pt-10 sm:pt-20 pb-8">
             <h2
                 class="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface mb-2">
                 User Quizzes</h2>
 
-            <div class="lg:grid lg:grid-cols-6 gap-16 mt-4">
+            <div class="lg:grid lg:grid-cols-6 lg:gap-16 mt-16 flex flex-col gap-8">
                 @foreach ($quizzes as $quiz)
                     <x-quiz-profile-preview :quiz="$quiz" :user="$user" />
                 @endforeach

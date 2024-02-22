@@ -8,7 +8,7 @@
                 class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 hover:opacity-0 transition-opacity duration-700 opacity-50">
             </div>
             <div
-                class="absolute bottom-0 right-0  p-2 m-2 flex flex-col justfify-center items-center gap-1 bg-black/90 rounded-xl">
+                class="absolute bottom-0 right-0  p-2 m-2 flex flex-col justfify-center items-center gap-1 bg-black/90 rounded-xl text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                     class="feather feather-award">
@@ -19,7 +19,7 @@
             </div>
         </a>
         <a href="/quizzes/{{ $quiz->slug }}">
-            <img class="w-full h-full rounded-lg object-cover" src="{{ asset("storage/{$quiz->thumbnail}") }}"
+            <img class="w-full max-h-64 rounded-lg object-cover" src="{{ asset("storage/{$quiz->thumbnail}") }}"
                 alt="Quiz Thumbnail">
         </a>
 
@@ -35,7 +35,8 @@
                 </a>
             </p>
         </div>
-        <p class="z-10 line-clamp-2 overflow-hidden overflow-ellipsis text-background/80 text-sm leading-snug mt-1">
+        <p
+            class="z-10 line-clamp-2 overflow-hidden overflow-ellipsis text-background/80 text-sm leading-snug mt-0 md:mt-1">
             {{ $quiz->description }}</p>
     </div>
 
