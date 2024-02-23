@@ -10,7 +10,7 @@
             <div class="flex flex-col md:flex-row gap-4 bg-white rounded-lg px-4 py-4">
                 <div class="min-w-64 h-64 flex items-center justify-center">
                     <img class="w-full h-full rounded-lg object-cover"
-                        src="{{ asset('storage/profile_pictures/' . auth()->user()->profile_picture) }}"
+                        src="{{ asset('storage/profile_pictures/' . $user->profile_picture) }}"
                         alt="{{ auth()->user()->name }}">
                 </div>
 

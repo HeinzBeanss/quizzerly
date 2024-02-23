@@ -40,6 +40,7 @@ class QuizController extends Controller
     {
         return view('quizzes.show', [
             'quiz' => Quiz::with([
+                'user',
                 'questions.answers' => function ($query) {
                     $query->inRandomOrder();
                 },

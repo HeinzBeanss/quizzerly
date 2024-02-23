@@ -50,6 +50,9 @@
         </div>
         </form>
 
+        <p class="w-full text-center text-sm">Created by <a class="underline underline-offset-2"
+                href="/users/{{ $quiz->user->username }}/profile">
+                {{ $quiz->user->name }}</a></p>
         <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 text-background pt-4 pb-4">
 
             <h3 class="text-lg text-background font-normal mb-1 mt-2">Comments</h3>
@@ -84,13 +87,15 @@
                     @foreach ($quiz->comments as $commentIndex => $comment)
                         <div
                             class="flex bg-faint px-4 py-4 rounded-lg mb-4 gap-4 items-start justify-start comment-container">
-                            <img class="w-12 rounded-md"
-                                src="{{ asset("storage/profile_pictures/{$comment->author->profile_picture}") }}"
-                                alt="{{ $comment->author->name }}">
+                            <a class="w-12" href="/users/{{ $comment->author->username }}/profile">
+                                <img class="min-w-12 h-full rounded-md"
+                                    src="{{ asset("storage/profile_pictures/{$comment->author->profile_picture}") }}"
+                                    alt="{{ $comment->author->name }}"></a>
                             <div class="right w-full">
-                                <p class="text-sm font-medium leading-6 text-background/80">
+                                <a href="/users/{{ $comment->author->username }}/profile"
+                                    class="text-sm font-medium leading-6 text-background/80">
                                     {{ $comment->author->name }}
-                                </p>
+                                </a>
                                 <p
                                     class="block w-full rounded-md border-0 text-background/80 text-xs sm:text-sm sm:leading-6 placeholder-background/50">
                                     {{ $comment->body }}</p>
