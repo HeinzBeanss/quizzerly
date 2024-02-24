@@ -1,4 +1,5 @@
 <x-layout :pagetitle="$quiz->name">
+    {{-- @dd($quiz->questions) --}}
     <x-announcement-bar />
     <x-gradient-background height="h-200 sm:h-200" />
     <x-header />

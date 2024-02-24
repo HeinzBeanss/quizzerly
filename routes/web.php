@@ -30,6 +30,8 @@ Route::post('quizzes/store', [QuizController::class, 'store'])->middleware('auth
 
 Route::get('quizzes/random', [QuizController::class, 'random']);
 Route::get('quizzes/popular', [QuizController::class, 'popular']);
+Route::get('quizzes/ai/create', [QuizController::class, 'openai_create'])->middleware('auth');
+Route::post('quizzes/ai/store', [QuizController::class, 'openai_store'])->middleware('auth');
 
 Route::get('quizzes/{quiz:slug}', [QuizController::class, 'show'])->name('quiz.show');
 Route::get('quizzes/{quiz:slug}/edit', [QuizController::class, 'edit'])->middleware('auth');

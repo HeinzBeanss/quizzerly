@@ -15,8 +15,12 @@
         @auth
             <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
                 href="/quizzes/create">CREATE</a>
+                            <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
+                href="/quizzes/ai/create">GENERATE WITH AI</a>
         @else
             <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/login">CREATE</a>
+                                        <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
+                href="/login">GENERATE WITH AI</a>
         @endauth
 
 
@@ -96,9 +100,13 @@
                 @auth
                     <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
                         href="/quizzes/create">Create</a>
+                                            <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
+                        href="/quizzes/ai/create">Create With AI</a>
                 @else
                     <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
                         href="/login">Create</a>
+                                            <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
+                        href="/login">Create With AI</a>
                 @endauth
             </div>
 

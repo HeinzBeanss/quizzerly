@@ -8,6 +8,8 @@ use App\Models\Question;
 use App\Models\Quiz;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class QuizController extends Controller
 {
@@ -246,4 +248,104 @@ class QuizController extends Controller
             'percentage' => $percentage,
         ]);
     }
+
+    public function openai_create()
+    {
+        return view('quizzes.ai.create');
+    }
+
+    public function openai_store()
+    {
+        $numberOfQuestions = request('numberofquestions');
+        $numberOfAnswers = request('answersperquestion');
+
+        $quizTitlePrompt = 'Generate a simple quiz title based on the subject of: ' . request('subject');
+        $quizTitleResponse = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => $quizTitlePrompt],
+            ],
+        ]);
+
+        $quizDescPrompt = 'Generate a short description for a quiz based on the name: ' . $quizTitleResponse->choices[0]->message->content . '. Don\'t exceed 180 characters';
+        $quizDescResponse = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => $quizDescPrompt],
+            ],
+        ]);
+
+        // Store Quiz in the Database
+        $storedQuiz = Quiz::create([
+            'name' => $quizTitleResponse->choices[0]->message->content,
+            'slug' => Str::slug($quizTitleResponse->choices[0]->message->content),
+            'description' => $quizDescResponse->choices[0]->message->content,
+            'category_id' => 16,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        $counter = 0;
+
+        while ($counter < $numberOfQuestions) {
+            $quizQuestionsPrompt = 'Based on the quiz title: ' . $quizTitleResponse->choices[0]->message->content . ', generate a question for that quiz. Don\'t exceed 180 characters, don\'t include any answers. Make it short and sweet. Keep in mind, this is question number: ' . $counter . 'therefore, pretend as if you have already reponded with that many previous questions, as I do not want any questions repeated. Do not mention the question number in the response.';
+
+            $quizQuestionsResponse = OpenAI::chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'system', 'content' => $quizQuestionsPrompt],
+                ],
+                'frequency_penalty' => 2,
+            ]);
+
+            // Store Each Question in the Database
+            $storedQuestion = Question::create([
+                'name' => $quizQuestionsResponse->choices[0]->message->content,
+                'quiz_id' => $storedQuiz->id,
+            ]);
+
+            // $quizQuestions[] = $quizQuestionsResponse->choices[0]->message->content;
+            $counter++;
+
+            $answerCounter = 0;
+
+            while ($answerCounter < $numberOfAnswers) {
+                if ($answerCounter === 0) {
+                    // Correct Answer
+                    $answerCorrectness = true;
+                    $quizAnswersPrompt = 'Generate the correct answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, keep it short and simple.';
+                } else {
+                    // Incorrectly Answer
+                    $answerCorrectness = false;
+                    $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, keep it short and simple. ';
+                }
+
+                $quizAnswersResponse = OpenAI::chat()->create([
+                    'model' => 'gpt-3.5-turbo',
+                    'messages' => [
+                        ['role' => 'system', 'content' => $quizAnswersPrompt],
+                    ],
+                    'frequency_penalty' => 2,
+                ]);
+
+                $storedAnswer = Answer::create([
+                    'is_correct' => $answerCorrectness,
+                    'name' => $quizAnswersResponse->choices[0]->message->content,
+                    'question_id' => $storedQuestion->id,
+                ]);
+
+                // $questionAnswers[] = $quizAnswersResponse->choices[0]->message->content;
+                $answerCounter++;
+            }
+        }
+
+        return redirect("/quizzes/$storedQuiz->slug")->with('success', 'Quiz successfully created using AI.');
+    }
 }
+
+// try {
+//     DB::beginTransaction();
+// } catch (\Exception $e) {
+//     DB::rollback();
+//     dd($e->getMessage());
+//     return redirect()->back()->with('error', 'Failed to create quiz. Please try again later.');
+// }

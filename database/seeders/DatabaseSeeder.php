@@ -19,120 +19,118 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         $categories = [
             'science' => [
                 'name' => 'Science',
                 'slug' => 'science',
                 'thumbnail' => 'science.jpg'
             ],
-                'history' => [
+            'history' => [
                 'name' => 'History',
                 'slug' => 'history',
                 'thumbnail' => 'history.jpg'
             ],
-                'general_knowledge' => [
+            'general_knowledge' => [
                 'name' => 'General Knowledge',
                 'slug' => 'general-knowledge',
                 'thumbnail' => 'general_knowledge.jpg'
             ],
-                'literature' => [
+            'literature' => [
                 'name' => 'Literature',
                 'slug' => 'literature',
                 'thumbnail' => 'literature.jpg'
             ],
-                'movies' => [
+            'movies' => [
                 'name' => 'Movies',
                 'slug' => 'movies',
                 'thumbnail' => 'movies.jpg'
             ],
-                'television' => [
+            'television' => [
                 'name' => 'Television',
                 'slug' => 'television',
                 'thumbnail' => 'television.jpg'
             ],
-                'music' => [
+            'music' => [
                 'name' => 'Music',
                 'slug' => 'music',
                 'thumbnail' => 'music.jpg'
             ],
-                'sports' => [
+            'sports' => [
                 'name' => 'Sports',
                 'slug' => 'sports',
                 'thumbnail' => 'sports.jpg'
             ],
-                'geography' => [
+            'geography' => [
                 'name' => 'Geography',
                 'slug' => 'geography',
                 'thumbnail' => 'geography.jpg'
             ],
-                'food' => [
+            'food' => [
                 'name' => 'Food',
                 'slug' => 'food',
                 'thumbnail' => 'food.jpg'
             ],
-                'technology' => [
+            'technology' => [
                 'name' => 'Technology',
                 'slug' => 'technology',
                 'thumbnail' => 'technology.jpg'
             ],
-                'art' => [
+            'art' => [
                 'name' => 'Art',
                 'slug' => 'art',
                 'thumbnail' => 'art.jpg'
             ],
-                'pop_culture' => [
+            'pop_culture' => [
                 'name' => 'Pop Culture',
                 'slug' => 'pop-culture',
                 'thumbnail' => 'pop_culture.jpg'
             ],
-                'games' => [
+            'games' => [
                 'name' => 'Games',
                 'slug' => 'games',
                 'thumbnail' => 'games.jpg'
-            ],                        
-                'animals' => [
+            ],
+            'animals' => [
                 'name' => 'Animals',
                 'slug' => 'animals',
                 'thumbnail' => 'animals.jpg'
+            ],
+            'ai_generated' => [
+                'name' => 'AI Generated',
+                'slug' => 'ai-generated',
+                'thumbnail' => 'technology.jpg'
             ]
         ];
 
         foreach ($categories as $category) {
-            
             Category::factory()->create([
-            'name' => $category['name'],
-            'slug' => $category['slug'],
-            'thumbnail' => $category['thumbnail'],
+                'name' => $category['name'],
+                'slug' => $category['slug'],
+                'thumbnail' => $category['thumbnail'],
             ]);
         }
 
-
         $users = User::factory(5)->create();
 
-        foreach($users as $user) {
-
+        foreach ($users as $user) {
             $quizzes = Quiz::factory(2)->create([
                 'user_id' => $user->id,
             ]);
 
-            foreach($quizzes as $quiz) {
-
+            foreach ($quizzes as $quiz) {
                 $questions = Question::factory(4)->create([
                     'quiz_id' => $quiz->id,
                 ]);
 
-                foreach($questions as $question) {
-
+                foreach ($questions as $question) {
                     $answers = Answer::factory(4)->create([
-                    'question_id' => $question->id,
+                        'question_id' => $question->id,
                     ]);
 
                     $answers->each(function ($answer, $index) {
                         $answer->is_correct = ($index === 0);
                         $answer->save();
                     });
-
                 }
 
                 $comments = Comment::factory()->create([
