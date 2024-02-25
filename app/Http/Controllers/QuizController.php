@@ -258,6 +258,15 @@ class QuizController extends Controller
 
     public function openai_store()
     {
+        // Check if the user has exceed 10 quizzes
+        $aiQuizCount = Quiz::where('user_id', auth()->id())
+                            ->where('category_id', 16)
+                            ->count();
+
+        if ($aiQuizCount > 10) {
+            return redirect()->back()->with('error', 'Sorry, you\'ve exceeded the limit on AI quizzes! ');
+        }
+
         // Validate the user's inputs
         request()->validate([
             'subject' => 'required|max:64',
@@ -265,141 +274,154 @@ class QuizController extends Controller
             'answersperquestion' => 'required|integer|numeric|max:8|min:2',
         ]);
 
-        $quizImagePrompt = request('subject');
-        $quizImageResponse = OpenAI::images()->create([
-            'model' => 'dall-e-2',
-            'prompt' => $quizImagePrompt,
-            'n' => 1,
-            'size' => '1024x1024',
-            'response_format' => 'url',
-        ]);
+        $thumbnail = '';
 
-        $imageUrl = $quizImageResponse->data[0]->url;
-        $filename = 'quiz_' . uniqid() . '.png';
+        try {
+            DB::beginTransaction();
 
-        $numberOfQuestions = request('numberofquestions');
-        $numberOfAnswers = request('answersperquestion');
+            try {
+                $quizImagePrompt = request('subject');
+                $quizImageResponse = OpenAI::images()->create([
+                    'model' => 'dall-e-2',
+                    'prompt' => $quizImagePrompt,
+                    'n' => 1,
+                    'size' => '1024x1024',
+                    'response_format' => 'url',
+                ]);
 
-        Storage::put('quizzes/' . $filename, file_get_contents($imageUrl));
+                $imageUrl = $quizImageResponse->data[0]->url;
+                $filename = 'quiz_' . uniqid() . '.png';
 
-        $quizTitlePrompt = 'Generate a simple quiz title based on the subject of: ' . request('subject');
-        $quizTitleResponse = OpenAI::chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'system', 'content' => $quizTitlePrompt],
-            ],
-        ]);
+                Storage::put('quizzes/' . $filename, file_get_contents($imageUrl));
 
-        $cleanedPromptResponse = str_replace('"', '', $quizTitleResponse->choices[0]->message->content);
-        // Validation Begins - Creates new array to validate
-        $dataToValidate = [
-            'title' => $cleanedPromptResponse,
-        ];
+                $thumbnail = 'quizzes/' . $filename;
+            } catch (\Exception $e) {
+                $thumbnail = null;
+            }
 
-        $validator = Validator::make($dataToValidate, [
-            'title' => 'required|unique:quizzes,name',
-        ], [
-            'title.required' => 'Sorry, there was an error generating the title.',
-            'title.unique' => 'It seems this topic has been used before, please try something else or be a little more specific with your subject!',
-        ]);
+            $numberOfQuestions = request('numberofquestions');
+            $numberOfAnswers = request('answersperquestion');
 
-        // Using the validate method to utilise the auto-feedback!
-        $validator->validate();
-
-        $quizDescPrompt = 'Generate a short description for a quiz based on the name: ' . $quizTitleResponse->choices[0]->message->content . '. Don\'t exceed 180 characters';
-        $quizDescResponse = OpenAI::chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'system', 'content' => $quizDescPrompt],
-            ],
-        ]);
-
-        // Store Quiz in the Database
-        $storedQuiz = Quiz::create([
-            'name' => $cleanedPromptResponse,
-            'slug' => Str::slug($quizTitleResponse->choices[0]->message->content),
-            'thumbnail' => 'quizzes/' . $filename,
-            'description' => $quizDescResponse->choices[0]->message->content,
-            'category_id' => 16,
-            'user_id' => auth()->user()->id,
-        ]);
-
-        $counter = 0;
-
-        $previousQuestions = [];
-
-        while ($counter < $numberOfQuestions) {
-            $previousQuestionsList = implode(', ', $previousQuestions);
-
-            $quizQuestionsPrompt = 'Based on the quiz title: ' . $quizTitleResponse->choices[0]->message->content . ', generate a question for that quiz. Don\'t exceed 180 characters, do not mention any kind of answers within the question. Do not mention the word question or the question number. Make it short and sweet. Make sure the question can have an unlimited number of answers. As to not repeat any questions, here are the previous questions already used within the quiz: ' . $previousQuestionsList;
-
-            $quizQuestionsResponse = OpenAI::chat()->create([
+            $quizTitlePrompt = 'Generate a simple quiz title based on the subject of: ' . request('subject');
+            $quizTitleResponse = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
                 'messages' => [
-                    ['role' => 'system', 'content' => $quizQuestionsPrompt],
+                    ['role' => 'system', 'content' => $quizTitlePrompt],
                 ],
-                'frequency_penalty' => 2,
             ]);
 
-            $previousQuestions[] = $quizQuestionsResponse->choices[0]->message->content;
+            $cleanedPromptResponse = str_replace('"', '', $quizTitleResponse->choices[0]->message->content);
+            // Validation Begins - Creates new array to validate
+            $dataToValidate = [
+                'title' => $cleanedPromptResponse,
+            ];
 
-            // Store Each Question in the Database
-            $storedQuestion = Question::create([
-                'name' => $quizQuestionsResponse->choices[0]->message->content,
-                'quiz_id' => $storedQuiz->id,
+            $validator = Validator::make($dataToValidate, [
+                'title' => 'required|unique:quizzes,name',
+            ], [
+                'title.required' => 'Sorry, there was an error generating the title.',
+                'title.unique' => 'It seems this topic has been used before, please try something else or be a little more specific with your subject!',
             ]);
 
-            // $quizQuestions[] = $quizQuestionsResponse->choices[0]->message->content;
-            $counter++;
+            // Using the validate method to utilise the auto-feedback!
+            $validator->validate();
 
-            $answerCounter = 0;
+            $quizDescPrompt = 'Generate a short description for a quiz based on the name: ' . $quizTitleResponse->choices[0]->message->content . '. Don\'t exceed 180 characters';
+            $quizDescResponse = OpenAI::chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'system', 'content' => $quizDescPrompt],
+                ],
+            ]);
 
-            $previousIncorrectAnswers = [];
+            // Store Quiz in the Database
 
-            while ($answerCounter < $numberOfAnswers) {
-                if ($answerCounter === 0) {
-                    // Correct Answer
-                    $answerCorrectness = true;
-                    $quizAnswersPrompt = 'Generate the correct answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, keep it short and simple.';
-                } else {
-                    // Incorrectly Answer
-                    $answerCorrectness = false;
-                    $previousAnswerList = implode(',', $previousIncorrectAnswers);
-                    $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is incorrect or not, keep it short and simple, but make sure it is incorrect. Here are the currently used incorrect answers for this question, as to not repeat any, think of an incorrect answer not within the following list:' . $previousAnswerList;
-                }
+            $quizAttributes = [
+                'name' => $cleanedPromptResponse,
+                'slug' => Str::slug($quizTitleResponse->choices[0]->message->content),
+                'description' => $quizDescResponse->choices[0]->message->content,
+                'category_id' => 16,
+                'user_id' => auth()->user()->id,
+            ];
 
-                $quizAnswersResponse = OpenAI::chat()->create([
+            if ($thumbnail !== null) {
+                $quizAttributes['thumbnail'] = $thumbnail;
+            }
+            $storedQuiz = Quiz::create($quizAttributes);
+
+            $counter = 0;
+
+            $previousQuestions = [];
+
+            while ($counter < $numberOfQuestions) {
+                $previousQuestionsList = implode(', ', $previousQuestions);
+
+                $quizQuestionsPrompt = 'Based on the quiz title: ' . $quizTitleResponse->choices[0]->message->content . ', generate a question for that quiz. Don\'t exceed 180 characters, do not mention any kind of answers within the question. Do not mention the word question or the question number. Make it short and sweet. Make sure the question can have an unlimited number of answers. As to not repeat any questions, here are the previous questions already used within the quiz: ' . $previousQuestionsList;
+
+                $quizQuestionsResponse = OpenAI::chat()->create([
                     'model' => 'gpt-3.5-turbo',
                     'messages' => [
-                        ['role' => 'system', 'content' => $quizAnswersPrompt],
+                        ['role' => 'system', 'content' => $quizQuestionsPrompt],
                     ],
                     'frequency_penalty' => 2,
                 ]);
 
-                // dd($quizAnswersResponse->choices[0]->message->content);
-                $previousIncorrectAnswers[] = $quizAnswersResponse->choices[0]->message->content;
+                $previousQuestions[] = $quizQuestionsResponse->choices[0]->message->content;
 
-                $storedAnswer = Answer::create([
-                    'is_correct' => $answerCorrectness,
-                    'name' => $quizAnswersResponse->choices[0]->message->content,
-                    'question_id' => $storedQuestion->id,
+                $cleanedQuestion = str_replace('"', '', $quizQuestionsResponse->choices[0]->message->content);
+                // Store Each Question in the Database
+                $storedQuestion = Question::create([
+                    'name' => $cleanedQuestion,
+                    'quiz_id' => $storedQuiz->id,
                 ]);
 
-                // $questionAnswers[] = $quizAnswersResponse->choices[0]->message->content;
-                $answerCounter++;
+                $counter++;
+
+                $answerCounter = 0;
+
+                $previousIncorrectAnswers = [];
+
+                while ($answerCounter < $numberOfAnswers) {
+                    if ($answerCounter === 0) {
+                        // Correct Answer
+                        $answerCorrectness = true;
+                        $quizAnswersPrompt = 'Generate the correct answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, keep it short and simple.';
+                    } else {
+                        // Incorrectly Answer
+                        $answerCorrectness = false;
+                        $previousAnswerList = implode(',', $previousIncorrectAnswers);
+                        $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is incorrect or not, keep it short and simple, but make sure it is incorrect. Here are the currently used incorrect answers for this question, as to not repeat any, think of an incorrect answer not within the following list:' . $previousAnswerList;
+                    }
+
+                    $quizAnswersResponse = OpenAI::chat()->create([
+                        'model' => 'gpt-3.5-turbo',
+                        'messages' => [
+                            ['role' => 'system', 'content' => $quizAnswersPrompt],
+                        ],
+                        'frequency_penalty' => 2,
+                    ]);
+
+                    $previousIncorrectAnswers[] = $quizAnswersResponse->choices[0]->message->content;
+
+                    $cleanedAnswer = str_replace('"', '', $quizAnswersResponse->choices[0]->message->content);
+
+                    $storedAnswer = Answer::create([
+                        'is_correct' => $answerCorrectness,
+                        'name' => $cleanedAnswer,
+                        'question_id' => $storedQuestion->id,
+                    ]);
+
+                    $answerCounter++;
+                }
+
+                $previousIncorrectAnswers = [];
             }
 
-            $previousIncorrectAnswers = [];
+            DB::commit();
+            return redirect("/quizzes/$storedQuiz->slug")->with('success', 'Quiz successfully created using AI.');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', $e->getMessage());
         }
-
-        return redirect("/quizzes/$storedQuiz->slug")->with('success', 'Quiz successfully created using AI.');
     }
 }
-
-// try {
-//     DB::beginTransaction();
-// } catch (\Exception $e) {
-//     DB::rollback();
-//     dd($e->getMessage());
-//     return redirect()->back()->with('error', 'Failed to create quiz. Please try again later.');
-// }

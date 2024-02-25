@@ -1,5 +1,5 @@
 <nav id="navbar-desktop"
-    class="navbar sticky top-0 w-full z-40 flex justify-between px-8  py-3 items-center backdrop-blur-md transition-all duration-1000">
+    class="navbar sticky top-0 w-full z-50 flex justify-between px-8  py-3 items-center backdrop-blur-md transition-all duration-1000">
     <a href="/">
         <h1
             class="text-2xl text-words hover:bg-gradient-to-br from-surface to-words hover:bg-clip-text hover:text-transparent transition duration-200 ease-in ">

@@ -3,7 +3,7 @@
     <x-gradient-background height="h-275 md:h-250" />
     <x-header />
 
-    <section class="relative text-faintest  mt-16 mb-8 md:mb-16">
+    <section class="relative text-faintest mt-16 mb-8 md:mb-16">
 
         <x-search-area :categories="$categories" />
 
@@ -14,7 +14,7 @@
                     <x-featured-quiz-preview :quiz="$quizzes[0]" />
                 </div>
             @else
-                <p class="text-center text-xl">Sorry, no quizzes found here!</p>
+                <p class="min-h-80 text-center text-xl">Sorry, no quizzes found here!</p>
             @endif
         </div>
     </section>

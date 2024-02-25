@@ -64,18 +64,23 @@
                                 </div>
                             </div>
                         </div>
+                        @if (session('error'))
+                            <p class="text-red-500 text-sm"> {{ session('error') }}</p>
+                        @endif
                     </div>
                 </form>
             </div>
+                                        <p class="mb-1 text-sm text-white font-thin">Note: In some cases, certain topics will go against image generation guidelines, therefore, a default image will be provided for the quiz instead.</p>
             <p class="mb-1 text-sm text-white font-thin">Note: Using AI can be unpredictable, it may be both
                 inaccurate and inconsistent.</p>
+
             <div class="bg-white w-min rounded-md mt-4 mx-auto p-4">
                 <button id="generatequizbutton"
                     class="mx-auto px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-60 text-sm sm:text-base font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow"
                     type="button" onclick="loadQuiz()">Generate
                     Quiz</button>
             </div>
-            <p id="generatingquiz" class="hidden mt-2 text-center text-sm font-thin">Generating Quiz...</p>
+            <p id="generatingquiz" class="hidden mt-2 text-center text-sm font-thin">Generating Quiz... This can take up to a minute</p>
             @error('title')
                 <p class="text-red-500 text-sm text-center"> {{ $message }}</p>
             @enderror

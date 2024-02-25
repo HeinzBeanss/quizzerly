@@ -30,6 +30,8 @@
     <section class="bg-white text-background border-background border-t-0">
         <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 text-background pt-8 sm:pt-16 pb-4">
 
+            <p class="text-lg border-b border-surface/20 mb-4 pb-4">{{ $quiz->description }}</p>
+
             <form action="/quizzes/{{ $quiz->slug }}/complete" method="post" class="flex flex-col gap-1">
                 @csrf
                 <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
