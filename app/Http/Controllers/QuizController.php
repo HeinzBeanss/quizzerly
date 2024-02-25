@@ -277,30 +277,10 @@ class QuizController extends Controller
         $thumbnail = '';
 
         try {
-            DB::beginTransaction();
-
-            try {
-                $quizImagePrompt = request('subject');
-                $quizImageResponse = OpenAI::images()->create([
-                    'model' => 'dall-e-2',
-                    'prompt' => $quizImagePrompt,
-                    'n' => 1,
-                    'size' => '1024x1024',
-                    'response_format' => 'url',
-                ]);
-
-                $imageUrl = $quizImageResponse->data[0]->url;
-                $filename = 'quiz_' . uniqid() . '.png';
-
-                Storage::put('quizzes/' . $filename, file_get_contents($imageUrl));
-
-                $thumbnail = 'quizzes/' . $filename;
-            } catch (\Exception $e) {
-                $thumbnail = null;
-            }
-
             $numberOfQuestions = request('numberofquestions');
             $numberOfAnswers = request('answersperquestion');
+
+            DB::beginTransaction();
 
             $quizTitlePrompt = 'Generate a simple quiz title based on the subject of: ' . request('subject');
             $quizTitleResponse = OpenAI::chat()->create([
@@ -325,6 +305,26 @@ class QuizController extends Controller
 
             // Using the validate method to utilise the auto-feedback!
             $validator->validate();
+
+            try {
+                $quizImagePrompt = 'Create an image related to ' . request('subject') . 'DO not  include any text.';
+                $quizImageResponse = OpenAI::images()->create([
+                    'model' => 'dall-e-3',
+                    'prompt' => $quizImagePrompt,
+                    'n' => 1,
+                    'size' => '1024x1024',
+                    'response_format' => 'url',
+                ]);
+
+                $imageUrl = $quizImageResponse->data[0]->url;
+                $filename = 'quiz_' . uniqid() . '.png';
+
+                Storage::put('quizzes/' . $filename, file_get_contents($imageUrl));
+
+                $thumbnail = 'quizzes/' . $filename;
+            } catch (\Exception $e) {
+                $thumbnail = null;
+            }
 
             $quizDescPrompt = 'Generate a short description for a quiz based on the name: ' . $quizTitleResponse->choices[0]->message->content . '. Don\'t exceed 180 characters';
             $quizDescResponse = OpenAI::chat()->create([
@@ -363,7 +363,7 @@ class QuizController extends Controller
                     'messages' => [
                         ['role' => 'system', 'content' => $quizQuestionsPrompt],
                     ],
-                    'frequency_penalty' => 2,
+                    'frequency_penalty' => 1,
                 ]);
 
                 $previousQuestions[] = $quizQuestionsResponse->choices[0]->message->content;
@@ -385,12 +385,12 @@ class QuizController extends Controller
                     if ($answerCounter === 0) {
                         // Correct Answer
                         $answerCorrectness = true;
-                        $quizAnswersPrompt = 'Generate the correct answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, keep it short and simple.';
+                        $quizAnswersPrompt = 'Generate the correct answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, do not include any answer numbers, keep it short and simple.';
                     } else {
                         // Incorrectly Answer
                         $answerCorrectness = false;
                         $previousAnswerList = implode(',', $previousIncorrectAnswers);
-                        $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is incorrect or not, keep it short and simple, but make sure it is incorrect. Here are the currently used incorrect answers for this question, as to not repeat any, think of an incorrect answer not within the following list:' . $previousAnswerList;
+                        $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is incorrect or not,  do not include any answer numbers, keep it short and simple, but make sure it is incorrect. Here are the currently used incorrect answers for this question, as to not repeat any, think of an incorrect answer not within the following list:' . $previousAnswerList;
                     }
 
                     $quizAnswersResponse = OpenAI::chat()->create([
@@ -398,7 +398,7 @@ class QuizController extends Controller
                         'messages' => [
                             ['role' => 'system', 'content' => $quizAnswersPrompt],
                         ],
-                        'frequency_penalty' => 2,
+                        'frequency_penalty' => 1,
                     ]);
 
                     $previousIncorrectAnswers[] = $quizAnswersResponse->choices[0]->message->content;
