@@ -14,11 +14,27 @@ if (window.location.pathname === '/') {
     const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay()])
 }
 
+// Loading for Generating Quiz using AI.
+window.loadQuiz = () => {
+
+    // Submit the form first
+    document.getElementById('aiform').submit();
+
+    const generatingquizfeedback = document.getElementById('generatingquiz');
+    generatingquizfeedback.classList.remove('hidden');
+
+    const generatequizbutton = document.getElementById('generatequizbutton');
+    generatequizbutton.disabled = true;
+}
+
 // Quiz Functionality
 const mainQuestionContainer = document.getElementById('question-container');
+let questionCount;
 
-let questionCount = mainQuestionContainer.childElementCount;
-console.log(questionCount);
+if (mainQuestionContainer) {
+    questionCount = mainQuestionContainer.childElementCount;
+}
+
 
 window.addQuestion = () => {
 

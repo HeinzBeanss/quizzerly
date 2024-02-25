@@ -15,9 +15,15 @@
                     {{ ceil($quiz->average_score) }}%</p>
             </div>
 
-            <img class="w-full max-h-72 h-72 sm:max-h-80 sm:h-80 rounded-xl object-cover mb-8 bg-faintest"
+            <img class="w-full max-h-72 h-72 sm:max-h-80 sm:h-80 rounded-xl object-cover mb-2 bg-faintest"
                 src="{{ asset("storage/{$quiz->thumbnail}") }}" alt="Quiz Thumbnail">
 
+            @if ($quiz->category->id === 16)
+                <div class="relative">
+                    <p class="absolute top-0 text-white text-sm font-thin">Note: This quiz was generated using AI based
+                        off a user's topic, it may be both inaccurate and inconsistent.</p>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -51,9 +57,16 @@
         </div>
         </form>
 
-        <p class="w-full text-center text-sm">Created by <a class="underline underline-offset-2"
-                href="/users/{{ $quiz->user->username }}/profile">
-                {{ $quiz->user->name }}</a></p>
+        @if ($quiz->category->id === 16)
+            <p class="w-full text-center text-sm">Created by <a class="underline underline-offset-2"
+                    href="/users/{{ $quiz->user->username }}/profile">
+                    {{ $quiz->user->name }}</a> using ChatGPT</p>
+        @else
+            <p class="w-full text-center text-sm">Created by <a class="underline underline-offset-2"
+                    href="/users/{{ $quiz->user->username }}/profile">
+                    {{ $quiz->user->name }}</a></p>
+        @endif
+
         <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 text-background pt-4 pb-4">
 
             <h3 class="text-lg text-background font-normal mb-1 mt-2">Comments</h3>

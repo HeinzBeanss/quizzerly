@@ -12,7 +12,7 @@ class ProfileController extends Controller
         
         return view('profile.show', [
             'user' => $user,
-            'quizzes' => Quiz::where('user_id', $user->id)->get(),
+            'quizzes' => Quiz::where('user_id', $user->id)->paginate(8),
         ]);
     }
 }

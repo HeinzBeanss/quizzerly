@@ -81,11 +81,13 @@
                 class="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface mb-2">
                 User Quizzes</h2>
 
-            <div class="lg:grid lg:grid-cols-6 lg:gap-16 mt-16 flex flex-col gap-8">
+            <div class="lg:grid lg:grid-cols-6 lg:gap-16 mt-2 flex flex-col gap-8">
                 @foreach ($quizzes as $quiz)
                     <x-quiz-profile-preview :quiz="$quiz" :user="$user" />
                 @endforeach
             </div>
+            <div class="border-b border-background/40 w-full pb-8 mb-4"></div>
+            {{ $quizzes->links() }}
 
         </div>
     </section>

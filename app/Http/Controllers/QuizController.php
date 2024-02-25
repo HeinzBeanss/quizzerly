@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use OpenAI\Laravel\Facades\OpenAI;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class QuizController extends Controller
 {
@@ -256,8 +258,29 @@ class QuizController extends Controller
 
     public function openai_store()
     {
+        // Validate the user's inputs
+        request()->validate([
+            'subject' => 'required|max:64',
+            'numberofquestions' => 'required|integer|numeric|max:8|min:1',
+            'answersperquestion' => 'required|integer|numeric|max:8|min:2',
+        ]);
+
+        $quizImagePrompt = request('subject');
+        $quizImageResponse = OpenAI::images()->create([
+            'model' => 'dall-e-2',
+            'prompt' => $quizImagePrompt,
+            'n' => 1,
+            'size' => '1024x1024',
+            'response_format' => 'url',
+        ]);
+
+        $imageUrl = $quizImageResponse->data[0]->url;
+        $filename = 'quiz_' . uniqid() . '.png';
+
         $numberOfQuestions = request('numberofquestions');
         $numberOfAnswers = request('answersperquestion');
+
+        Storage::put('quizzes/' . $filename, file_get_contents($imageUrl));
 
         $quizTitlePrompt = 'Generate a simple quiz title based on the subject of: ' . request('subject');
         $quizTitleResponse = OpenAI::chat()->create([
@@ -266,6 +289,22 @@ class QuizController extends Controller
                 ['role' => 'system', 'content' => $quizTitlePrompt],
             ],
         ]);
+
+        $cleanedPromptResponse = str_replace('"', '', $quizTitleResponse->choices[0]->message->content);
+        // Validation Begins - Creates new array to validate
+        $dataToValidate = [
+            'title' => $cleanedPromptResponse,
+        ];
+
+        $validator = Validator::make($dataToValidate, [
+            'title' => 'required|unique:quizzes,name',
+        ], [
+            'title.required' => 'Sorry, there was an error generating the title.',
+            'title.unique' => 'It seems this topic has been used before, please try something else or be a little more specific with your subject!',
+        ]);
+
+        // Using the validate method to utilise the auto-feedback!
+        $validator->validate();
 
         $quizDescPrompt = 'Generate a short description for a quiz based on the name: ' . $quizTitleResponse->choices[0]->message->content . '. Don\'t exceed 180 characters';
         $quizDescResponse = OpenAI::chat()->create([
@@ -277,8 +316,9 @@ class QuizController extends Controller
 
         // Store Quiz in the Database
         $storedQuiz = Quiz::create([
-            'name' => $quizTitleResponse->choices[0]->message->content,
+            'name' => $cleanedPromptResponse,
             'slug' => Str::slug($quizTitleResponse->choices[0]->message->content),
+            'thumbnail' => 'quizzes/' . $filename,
             'description' => $quizDescResponse->choices[0]->message->content,
             'category_id' => 16,
             'user_id' => auth()->user()->id,
@@ -286,8 +326,12 @@ class QuizController extends Controller
 
         $counter = 0;
 
+        $previousQuestions = [];
+
         while ($counter < $numberOfQuestions) {
-            $quizQuestionsPrompt = 'Based on the quiz title: ' . $quizTitleResponse->choices[0]->message->content . ', generate a question for that quiz. Don\'t exceed 180 characters, don\'t include any answers. Make it short and sweet. Keep in mind, this is question number: ' . $counter . 'therefore, pretend as if you have already reponded with that many previous questions, as I do not want any questions repeated. Do not mention the question number in the response.';
+            $previousQuestionsList = implode(', ', $previousQuestions);
+
+            $quizQuestionsPrompt = 'Based on the quiz title: ' . $quizTitleResponse->choices[0]->message->content . ', generate a question for that quiz. Don\'t exceed 180 characters, do not mention any kind of answers within the question. Do not mention the word question or the question number. Make it short and sweet. Make sure the question can have an unlimited number of answers. As to not repeat any questions, here are the previous questions already used within the quiz: ' . $previousQuestionsList;
 
             $quizQuestionsResponse = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
@@ -296,6 +340,8 @@ class QuizController extends Controller
                 ],
                 'frequency_penalty' => 2,
             ]);
+
+            $previousQuestions[] = $quizQuestionsResponse->choices[0]->message->content;
 
             // Store Each Question in the Database
             $storedQuestion = Question::create([
@@ -308,6 +354,8 @@ class QuizController extends Controller
 
             $answerCounter = 0;
 
+            $previousIncorrectAnswers = [];
+
             while ($answerCounter < $numberOfAnswers) {
                 if ($answerCounter === 0) {
                     // Correct Answer
@@ -316,7 +364,8 @@ class QuizController extends Controller
                 } else {
                     // Incorrectly Answer
                     $answerCorrectness = false;
-                    $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is correct or not, keep it short and simple. ';
+                    $previousAnswerList = implode(',', $previousIncorrectAnswers);
+                    $quizAnswersPrompt = 'Generate an incorrect answer to the question: ' . $quizQuestionsResponse->choices[0]->message->content . '. Don\'t exceed 180 characters. Don\'t specify if it is incorrect or not, keep it short and simple, but make sure it is incorrect. Here are the currently used incorrect answers for this question, as to not repeat any, think of an incorrect answer not within the following list:' . $previousAnswerList;
                 }
 
                 $quizAnswersResponse = OpenAI::chat()->create([
@@ -327,6 +376,9 @@ class QuizController extends Controller
                     'frequency_penalty' => 2,
                 ]);
 
+                // dd($quizAnswersResponse->choices[0]->message->content);
+                $previousIncorrectAnswers[] = $quizAnswersResponse->choices[0]->message->content;
+
                 $storedAnswer = Answer::create([
                     'is_correct' => $answerCorrectness,
                     'name' => $quizAnswersResponse->choices[0]->message->content,
@@ -336,6 +388,8 @@ class QuizController extends Controller
                 // $questionAnswers[] = $quizAnswersResponse->choices[0]->message->content;
                 $answerCounter++;
             }
+
+            $previousIncorrectAnswers = [];
         }
 
         return redirect("/quizzes/$storedQuiz->slug")->with('success', 'Quiz successfully created using AI.');

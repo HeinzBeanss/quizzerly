@@ -5,22 +5,23 @@
             class="text-2xl text-words hover:bg-gradient-to-br from-surface to-words hover:bg-clip-text hover:text-transparent transition duration-200 ease-in ">
             Quizzerly</h1>
     </a>
-    <div class="text-words flex gap-2 lg:gap-6 text-sm font-normal ">
-        <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/">HOME</a>
+    <div class="text-words flex gap-2 md:gap-4 lg:gap-4 xl:gap-6 text-sm font-normal ">
+        <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white hidden lg:block"
+            href="/">HOME</a>
         <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/quizzes">ALL QUIZZES</a>
-        <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
+        <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white hidden lg:block"
             href="/quizzes/popular">POPULAR</a>
         <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
             href="/quizzes/random">RANDOM</a>
         @auth
             <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
                 href="/quizzes/create">CREATE</a>
-                            <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
+            <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
                 href="/quizzes/ai/create">GENERATE WITH AI</a>
         @else
             <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/login">CREATE</a>
-                                        <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white"
-                href="/login">GENERATE WITH AI</a>
+            <a class="pl-4 lg:pl-8 hover:underline hover:underline-offset-4 hover:text-white" href="/login">GENERATE WITH
+                AI</a>
         @endauth
 
 
@@ -100,12 +101,12 @@
                 @auth
                     <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
                         href="/quizzes/create">Create</a>
-                                            <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
+                    <a class="text-sm bg-white py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
                         href="/quizzes/ai/create">Create With AI</a>
                 @else
                     <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
                         href="/login">Create</a>
-                                            <a class="text-sm bg-faint py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
+                    <a class="text-sm bg-whitet py-2 pr-8 text-end w-full hover:underline hover:underline-offset-4 hover:text-background"
                         href="/login">Create With AI</a>
                 @endauth
             </div>
