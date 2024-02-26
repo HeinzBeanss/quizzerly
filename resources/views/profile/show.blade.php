@@ -11,7 +11,7 @@
                 <div class="min-w-64 h-64 flex items-center justify-center">
                     <img class="w-full h-full rounded-lg object-cover"
                         src="{{ asset('storage/profile_pictures/' . $user->profile_picture) }}"
-                        alt="{{ auth()->user()->name }}">
+                        alt="{{ $user->name }}">
                 </div>
 
 
@@ -39,6 +39,7 @@
                             <p class="text-xs text-red-500"> {{ $errors->first('profile_picture') }}</p>
                         @enderror
                         <div class="profilebuttoncontainer flex gap-4 w-full">
+                            @auth
                             @if ($user->id === auth()->user()->id)
                                 <form id="profile-form" class="w-full" action="/users/{user:username}/update"
                                     enctype="multipart/form-data" method="POST">
@@ -67,6 +68,7 @@
                                     Account
                                 </a>
                             @endif
+                            @endauth
                         </div>
                     </div>
                 </div>
