@@ -103,8 +103,8 @@
                     @foreach ($quiz->comments as $commentIndex => $comment)
                         <div
                             class="flex bg-faint px-4 py-4 rounded-lg mb-4 gap-4 items-start justify-start comment-container">
-                            <a class="w-12" href="/users/{{ $comment->author->username }}/profile">
-                                <img class="min-w-12 rounded-md"
+                            <a class="w-12 h-12" href="/users/{{ $comment->author->username }}/profile">
+                                <img class="min-w-12 h-full object-cover rounded-md"
                                     src="{{ asset("storage/profile_pictures/{$comment->author->profile_picture}") }}"
                                     alt="{{ $comment->author->name }}"></a>
                             <div class="right w-full">
