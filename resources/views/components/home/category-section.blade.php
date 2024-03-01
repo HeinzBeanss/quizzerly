@@ -35,7 +35,7 @@
                                     src="{{ asset("storage/categories/{$category->thumbnail}") }}"
                                     alt="Your alt text" />
                                 <div
-                                    class="bg-faint border-background py-2 rounded-bl-lg rounded-br-lg hover:bg-lighter hover:text-faintest transition-colors duration-100">
+                                    class="bg-faint text-background border-background py-2 rounded-bl-lg rounded-br-lg hover:bg-gradient-to-tl from-background/70 via-surface to-background/70 w-full hover:text-faintest transition-colors duration-100">
                                     <p class="text-sm tracking-wide font-normal">{{ $category->name }}
                                     </p>
                                 </div>

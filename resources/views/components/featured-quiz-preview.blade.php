@@ -18,7 +18,7 @@
                 </svg>
                 <p class="text-sm font-thin">Plays: {{ $quiz->times_taken }}</p>
             </div>
-            @if ($quiz->category->id === 16)
+            @if ($quiz->aigenerated === 1)
                 <div
                     class="flex flex-col gap-1 items-center justify-center h-min items-center p-2 m-2 bg-black/90 rounded-xl">
                     <p class="text-sm font-thin">Made with</p>

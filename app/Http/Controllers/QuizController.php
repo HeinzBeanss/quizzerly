@@ -253,7 +253,9 @@ class QuizController extends Controller
 
     public function openai_create()
     {
-        return view('quizzes.ai.create');
+        return view('quizzes.ai.create', [
+            'categories' => Category::all(),
+        ]);
     }
 
     public function openai_store()
@@ -272,6 +274,16 @@ class QuizController extends Controller
             'subject' => 'required|max:64',
             'numberofquestions' => 'required|integer|numeric|max:8|min:1',
             'answersperquestion' => 'required|integer|numeric|max:8|min:2',
+            'category_id' => 'required|numeric',
+        ], [
+            'numberofquestions.max' => 'The maximum number of questions is 8.',
+            'answersperquestion.max' => 'The maximum number of answers per question is 8.',
+            'numberofquestions.min' => 'The minimum number of questions is 1.',
+            'answersperquestion.min' => 'The minimum number of answers per question is 2.',
+            'numberofquestions.numeric' => 'Please enter a valid number.',
+            'answersperquestion.numeric' => 'Please enter a valid number.',
+            'numberofquestions.required' => 'Please enter a valid number.',
+            'answersperquestion.required' => 'Please enter a valid number.',
         ]);
 
         $thumbnail = '';
@@ -335,12 +347,12 @@ class QuizController extends Controller
             ]);
 
             // Store Quiz in the Database
-
             $quizAttributes = [
                 'name' => $cleanedPromptResponse,
                 'slug' => Str::slug($quizTitleResponse->choices[0]->message->content),
                 'description' => $quizDescResponse->choices[0]->message->content,
-                'category_id' => 16,
+                'aigenerated' => true,
+                'category_id' => request('category_id'),
                 'user_id' => auth()->user()->id,
             ];
 

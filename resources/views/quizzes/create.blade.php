@@ -25,6 +25,7 @@
                     <div class="mb-4"></div>
 
                     <p class="text-background/80 text-sm font-medium pb-2">Category</p>
+                
                     <x-dropdown :categories="$categories" :currentCategory="$categories[0]" />
 
                 </div>
@@ -37,14 +38,14 @@
                     users take
                     the quiz.
                 </p>
-                <div id="question-container">
+                <div id="question-container" class="questioncontainer">
                     <x-input-question />
                 </div>
 
             </form>
 
             <div class="end-section-quiz rounded-lg bg-white px-4 py-4 mt-1">
-                <div class="buttoncontainer flex flex-col sm:flex-row gap-4">
+                <div class="buttoncontainer flex flex-col sm:flex-row gap-4 items-center">
                     <button
                         class="px-4 py-2.5 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md min-w-40 text-xs sm:text-sm font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow"
                         type="button" onclick="addQuestion()">Add
@@ -52,6 +53,7 @@
                     <button form="quiz-form"
                         class="px-4 py-2.5 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md min-w-40 text-xs sm:text-sm font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow"
                         type="submit">Create Quiz</button>
+                        <p id="questionError" class="text-red-500 text-sm"></p>
                 </div>
             </div>
 

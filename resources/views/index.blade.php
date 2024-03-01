@@ -7,7 +7,7 @@
 
         <x-search-area :categories="$categories" />
 
-        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 md:mx-auto flex gap-8">
+        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 max-w-screen-xl md:mx-auto flex gap-8">
             @if ($quizzes->count())
                 <div class="w-full">
                     <h2 class="text-3xl font-normal mb-2">Featured Quiz</h2>
@@ -24,7 +24,7 @@
     <x-home.category-section :categories="$categories" />
 
     <section class="bg-faint text-background border-background border-t-0">
-        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 md:mx-auto text-white pt-20 pb-4">
+        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 max-w-screen-xl md:mx-auto text-white pt-20 pb-4">
 
             <div class="flex flex-col  md:flex-row gap-8 lg:gap-16">
                 <div class="flex flex-col w-full order-last md:order-first">

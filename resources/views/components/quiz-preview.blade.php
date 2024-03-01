@@ -6,8 +6,8 @@
             <div
                 class="absolute top-0 left-0 w-full h-full rounded-xl bg-gradient-to-t from-background z-1 hover:opacity-0 transition-opacity duration-700 opacity-50">
             </div>
-            <div class="flex absolute bottom-0 right-0 justfify-center items-center">
-                @if ($quiz->category->id === 16)
+            <div class="flex absolute top-0 right-0 justfify-center items-center">
+                @if ($quiz->aigenerated === 1)
                     <div class="flex justify-center h-min items-center p-2 m-2 bg-black/90 rounded-xl">
                         <svg width="2500" height="2500" fill="none" xmlns="http://www.w3.org/2000/svg"
                             stroke-width="1.5" class="h-9 w-9"

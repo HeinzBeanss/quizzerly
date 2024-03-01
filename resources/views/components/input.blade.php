@@ -11,6 +11,6 @@
     <div class="mt-1 sm:mt-2">
         <input id="{{ $name }}" name="{{ $name }}" type="{{ $type }}"
             autocomplete="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}" required
-            class="pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-background/10 placeholder:text-background/50 focus:ring-1 focus:outline-0 focus:ring-surface text-xs sm:text-sm sm:leading-6">
+            class="pl-2 block w-full rounded-md border-0 py-1.5 text-background/80 shadow-sm ring-1 ring-inset ring-background/10 placeholder:text-background/50 focus:ring-1 focus:outline-0 focus:ring-surface text-xs sm:text-sm sm:leading-6 dark:bg-faint">
     </div>
 </div>

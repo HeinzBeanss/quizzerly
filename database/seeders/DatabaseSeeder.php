@@ -95,10 +95,10 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'animals',
                 'thumbnail' => 'animals.jpg'
             ],
-            'ai_generated' => [
-                'name' => 'AI Generated',
-                'slug' => 'ai-generated',
-                'thumbnail' => 'technology.jpg'
+            'entertainment' => [
+                'name' => 'entertainment',
+                'slug' => 'entertainment',
+                'thumbnail' => 'entertainment.jpg'
             ]
         ];
 

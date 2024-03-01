@@ -35,7 +35,9 @@ export default {
         'faint': '#f7f7f7',
         'category': '#e3e9e4',
         'faintest': '#F0F7F6',
-        'almostwhite': '#fcfcfc'
+        'almostwhite': '#fcfcfc',
+        'darkest': '#242525',
+        'dark': '#282929',
       },
       height: {
         '150': '30rem',

@@ -20,9 +20,7 @@
                                     class="block text-sm font-medium leading-6 text-background/80">Enter a subject /
                                     topic
                                 </label>
-                                @error('subject')
-                                    <p class="text-red-500 text-xs"> {{ $message }} </p>
-                                @enderror
+
                             </div>
                             <div class="mt-1 sm:mt-2">
                                 <input id="subject" name="subject" type="text" value="{{ old('subject') }}"
@@ -37,9 +35,7 @@
                                         class="block text-sm font-medium leading-6 text-background/80">Number of
                                         Questions
                                     </label>
-                                    @error('numberofquestions')
-                                        <p class="text-red-500 text-xs"> {{ $message }} </p>
-                                    @enderror
+
                                 </div>
                                 <div class="mt-1 sm:mt-2">
                                     <input id="numberofquestions" name="numberofquestions" type="number"
@@ -53,9 +49,7 @@
                                         class="block text-sm font-medium leading-6 text-background/80">Answers per
                                         Question
                                     </label>
-                                    @error('answersperquestion')
-                                        <p class="text-red-500 text-xs"> {{ $message }} </p>
-                                    @enderror
+
                                 </div>
                                 <div class="mt-1 sm:mt-2">
                                     <input id="answersperquestion" name="answersperquestion" type="number"
@@ -64,13 +58,32 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="flex items-start justify-center flex-col">
+                            <label for="numberofquestions"
+                                class="block text-sm font-medium leading-6 text-background/80 mb-2">Choose a Category
+                            </label>
+                            <x-dropdown :categories="$categories" :currentCategory="$categories[0]" />
+                        </div>
+
+
                         @if (session('error'))
                             <p class="text-red-500 text-sm"> {{ session('error') }}</p>
                         @endif
+                        @error('subject')
+                            <p class="text-red-500 text-xs"> {{ $message }} </p>
+                        @enderror
+                        @error('numberofquestions')
+                            <p class="text-red-500 text-xs"> {{ $message }} </p>
+                        @enderror
+                        @error('answersperquestion')
+                            <p class="text-red-500 text-xs"> {{ $message }} </p>
+                        @enderror
                     </div>
                 </form>
             </div>
-                                        <p class="mb-1 text-sm text-white font-thin">Note: In some cases, certain topics will go against image generation guidelines, therefore, a default image will be provided for the quiz instead.</p>
+            <p class="mb-1 text-sm text-white font-thin">Note: In some cases, certain topics will go against image
+                generation guidelines, therefore, a default image will be provided for the quiz instead.</p>
             <p class="mb-1 text-sm text-white font-thin">Note: Using AI can be unpredictable, it may be both
                 inaccurate and inconsistent.</p>
 
@@ -80,7 +93,8 @@
                     type="button" onclick="loadQuiz()">Generate
                     Quiz</button>
             </div>
-            <p id="generatingquiz" class="hidden mt-2 text-center text-sm font-thin">Generating Quiz... This can take up to a minute</p>
+            <p id="generatingquiz" class="hidden mt-2 text-center text-sm font-thin">Generating Quiz... This can take up
+                to a minute</p>
             @error('title')
                 <p class="text-red-500 text-sm text-center"> {{ $message }}</p>
             @enderror

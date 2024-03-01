@@ -4,7 +4,7 @@
     <x-header />
 
     <section class="relative text-faintest pt-16 pb-6 md:pb-16">
-        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 max-w-screen-xl">
             <h2 class="text-3xl font-normal mb-2 text-faintest">Profile</h2>
 
             <div class="flex flex-col md:flex-row gap-4 bg-white rounded-lg px-4 py-4">
@@ -78,7 +78,7 @@
     </section>
 
     <section class="bg-faint text-background border-background border-t-0">
-        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 pt-10 sm:pt-20 pb-8">
+        <div class="mx-4 sm:w-4/5 lg:w-3/4 xl:w-1/2 sm:mx-auto gap-8 pt-10 sm:pt-20 pb-4 max-w-screen-xl">
             <h2
                 class="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-br from-background/85 to-surface mb-2">
                 User Quizzes</h2>
@@ -88,7 +88,7 @@
                     <x-quiz-profile-preview :quiz="$quiz" :user="$user" />
                 @endforeach
             </div>
-            <div class="border-b border-background/40 w-full pb-8 mb-4"></div>
+            <div class="border-b border-background/40 w-full pb-12 mb-8"></div>
             {{ $quizzes->links() }}
 
         </div>

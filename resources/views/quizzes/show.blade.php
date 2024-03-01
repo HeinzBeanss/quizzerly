@@ -18,7 +18,7 @@
             <img class="w-full max-h-72 h-72 sm:max-h-80 sm:h-80 rounded-xl object-cover mb-2 bg-faintest"
                 src="{{ asset("storage/{$quiz->thumbnail}") }}" alt="Quiz Thumbnail">
 
-            @if ($quiz->category->id === 16)
+            @if ($quiz->aigenerated === 1)
                 <div class="relative">
                     <p class="absolute top-0 text-white text-sm font-thin">Note: This quiz was generated using AI based
                         off a user's topic, it may be both inaccurate and inconsistent.</p>
@@ -41,7 +41,7 @@
 
         </div>
         <div
-            class="end-section-quiz rounded-lg bg-faint px-4 py-4 my-0 sm:my-6 w-60 mx-auto flex flex-col justify-center">
+            class="end-section-quiz rounded-lg bg-faint px-4 py-4 mb-2 my-0 sm:my-6 w-60 mx-auto flex flex-col justify-center">
             @if (is_null(session('score')))
                 <button
                     class="px-4 text-white py-4 bg-gradient-to-br from-lighter/90 via-surface to-background/70 rounded-md w-full text-sm sm:text-base font-light tracking-wide hover:font-normal hover:from-lighter hover:to-background/70 hover:shadow">Complete
@@ -59,7 +59,7 @@
         </div>
         </form>
 
-        @if ($quiz->category->id === 16)
+        @if ($quiz->aigenerated === 1)
             <p class="w-full text-center text-sm">Created by <a class="underline underline-offset-2"
                     href="/users/{{ $quiz->user->username }}/profile">
                     {{ $quiz->user->name }}</a> using ChatGPT</p>
@@ -104,7 +104,7 @@
                         <div
                             class="flex bg-faint px-4 py-4 rounded-lg mb-4 gap-4 items-start justify-start comment-container">
                             <a class="w-12" href="/users/{{ $comment->author->username }}/profile">
-                                <img class="min-w-12 h-full rounded-md"
+                                <img class="min-w-12 rounded-md"
                                     src="{{ asset("storage/profile_pictures/{$comment->author->profile_picture}") }}"
                                     alt="{{ $comment->author->name }}"></a>
                             <div class="right w-full">

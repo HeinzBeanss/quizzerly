@@ -38,6 +38,16 @@ if (mainQuestionContainer) {
 
 window.addQuestion = () => {
 
+    const currentQuestionCount = document.querySelectorAll('.questioncontainer').length;
+    const questionError = document.getElementById('questionError');
+
+    if (currentQuestionCount > 19) {
+        questionError.textContent = "Sorry, only 20 questions per quiz!";
+        return;
+    }
+
+    questionError.textContent = "";
+
     // Question
     let thisQuestion = questionCount;
 

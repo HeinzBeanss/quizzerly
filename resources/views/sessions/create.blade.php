@@ -28,7 +28,7 @@
                         </div>
                         <div class="mt-2">
                             <input id="email" name="email" type="email" autocomplete="email" required
-                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-background shadow-sm ring-1 ring-inset ring-background/10 placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6">
+                                class="pl-2 block w-full rounded-md border-0 py-1.5 text-background shadow-sm ring-1 ring-inset ring-background/10 placeholder:text-surface focus:ring-1 focus:outline-0 focus:ring-surface sm:text-sm sm:leading-6 ">
                         </div>
                     </div>
                     <div>

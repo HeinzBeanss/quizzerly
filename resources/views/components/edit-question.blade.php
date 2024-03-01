@@ -1,6 +1,6 @@
 @props(['index', 'question'])
 
-<div class="flex flex-col bg-white px-4 py-4 rounded-lg gap-2 mb-3">
+<div class="flex flex-col bg-white px-4 py-4 rounded-lg gap-2 mb-3 questioncontainer">
     <div class="flex justify-between items-center w-full">
         <label for="question_0" class="block text-sm font-medium leading-6 text-background/80">Question Title</label>
     </div>

@@ -7,7 +7,7 @@
 
         <x-search-area :categories="$categories" />
 
-        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 md:mx-auto gap-8">
+        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 md:mx-auto gap-8 max-w-screen-xl">
             @if ($quizzes->count())
                 <div class="w-full">
                     <h2 class="text-3xl font-normal mb-2">{{ $category->name }}</h2>
@@ -20,7 +20,7 @@
     </section>
 
     <section class="bg-white text-background border-background border-t-0">
-        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 md:mx-auto text-white pt-16 md:pt-16 pb-4">
+        <div class="mx-4 md:mx-0 md:w-4/5 lg:w-2/3 md:mx-auto text-white pt-16 md:pt-16 pb-4 max-w-screen-xl">
             @if ($quizzes->count() > 1)
                 <div class="lg:grid lg:grid-cols-6 lg:gap-16 flex flex-col gap-8">
 
@@ -28,7 +28,7 @@
                         <x-quiz-preview :quiz="$quiz" />
                     @endforeach
                 </div>
-                <div class="border-b border-background/40 w-full pb-8 mb-4"></div>
+                <div class="border-b border-background/40 w-full pb-12 mb-8"></div>
                 {{ $quizzes->links() }}
         </div>
     @else
